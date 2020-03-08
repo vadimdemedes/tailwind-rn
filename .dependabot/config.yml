@@ -1,0 +1,9 @@
+version: 1
+update_configs:
+  - package_manager: 'javascript'
+    directory: '/'
+    update_schedule: 'live'
+    allowed_updates:
+      - match:
+          dependency_name: 'tailwindcss'
+          dependency_type: 'direct'
