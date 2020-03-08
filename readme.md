@@ -46,8 +46,8 @@ Array of Tailwind CSS classes you want to generate styles for.
 Get color value from Tailwind CSS color name.
 
 ```js
-import {getColor} fro 'tailwind-rn';
+import {getColor} from 'tailwind-rn';
 
-getColor('blue-500')
+getColor('blue-500');
 //=> '#ebf8ff'
 ```
