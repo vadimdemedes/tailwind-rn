@@ -10,7 +10,7 @@ $ npm install tailwind-rn
 
 ## Usage
 
-Import `tailwind-rn` module and use any of the supported utilities from [Tailwind CSS](https://tailwindcss.com) in your [React Native](https://reactnative.dev) views.
+Import `tailwind-rn` module and use any of the [supported utilities](#supported-utilities) from [Tailwind CSS](https://tailwindcss.com) in your [React Native](https://reactnative.dev) views.
 
 ```js
 import {SafeAreaView, View} from 'react-native';
@@ -40,6 +40,73 @@ tailwind('pt-12 items-center');
 //     alignItems: 'center'
 //   }
 ```
+
+## Supported Utilities
+
+### Layout
+
+- [Display](https://tailwindcss.com/docs/display) (only `hidden` and `flex`)
+- [Overflow](https://tailwindcss.com/docs/overflow) (only `overflow-hidden`, `overflow-scroll` and `overflow-visible`)
+- [Position](https://tailwindcss.com/docs/position) (only `relative` and `absolute`)
+- [Top / Right / Bottom / Left](https://tailwindcss.com/docs/top-right-bottom-left) (all except `*-auto`)
+- [Z-Index](https://tailwindcss.com/docs/z-index) (all except `z-auto`)
+
+### Flexbox
+
+- [Flex Direction](https://tailwindcss.com/docs/flex-direction)
+- [Flex Wrap](https://tailwindcss.com/docs/flex-wrap)
+- [Align Items](https://tailwindcss.com/docs/align-items)
+- [Align Content](https://tailwindcss.com/docs/align-content)
+- [Align Self](https://tailwindcss.com/docs/align-self)
+- [Justify Content](https://tailwindcss.com/docs/justify-content)
+- [Flex](https://tailwindcss.com/docs/flex)
+- [Flex Grow](https://tailwindcss.com/docs/flex-grow)
+- [Flex Shrink](https://tailwindcss.com/docs/flex-shrink)
+
+### Spacing
+
+- [Padding](https://tailwindcss.com/docs/padding)
+- [Margin](https://tailwindcss.com/docs/margin)
+
+### Sizing
+
+- [Width](https://tailwindcss.com/docs/width) (all except `w-auto` and `w-screen`)
+- [Min-Width](https://tailwindcss.com/docs/min-width)
+- [Max-Width](https://tailwindcss.com/docs/max-width)
+- [Height](https://tailwindcss.com/docs/height) (all except `h-auto` and `h-screen`)
+- [Min-Height](https://tailwindcss.com/docs/min-height) (all except `min-h-screen`)
+- [Max-Height](https://tailwindcss.com/docs/max-height) (only `max-h-full`)
+
+### Typography
+
+- [Font Size](https://tailwindcss.com/docs/font-size)
+- [Font Style](https://tailwindcss.com/docs/font-style)
+- [Font Weight](https://tailwindcss.com/docs/font-weight)
+- [Letter Spacing](https://tailwindcss.com/docs/letter-spacing)
+- [Line Height](https://tailwindcss.com/docs/line-height)
+- [Text Align](https://tailwindcss.com/docs/text-align)
+- [Text Color](https://tailwindcss.com/docs/text-color)
+- [Text Decoration](https://tailwindcss.com/docs/text-decoration)
+- [Text Transform](https://tailwindcss.com/docs/text-transform)
+
+### Backgrounds
+
+- [Background Color](https://tailwindcss.com/docs/background-color)
+
+### Borders
+
+- [Border Color](https://tailwindcss.com/docs/border-color)
+- [Border Style](https://tailwindcss.com/docs/border-style)
+- [Border Width](https://tailwindcss.com/docs/border-width)
+- [Border Radius](https://tailwindcss.com/docs/border-radius)
+
+### Effects
+
+- [Opacity](https://tailwindcss.com/docs/opacity)
+
+### Interactivity
+
+- [Pointer Events](https://tailwindcss.com/docs/pointer-events)
 
 ## API
 
