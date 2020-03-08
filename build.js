@@ -79,8 +79,8 @@ const supportedUtilities = [
 	'lowercase',
 	'capitalize',
 	'normal-case',
-	// Background attachment, color, position, repeat, size
-	/^bg-/,
+	// Background color
+	/^bg-(transparent|black|white|gray|red|orange|yellow|green|teal|blue|indigo|purple|pink)/,
 	// Border color, style, width, radius
 	/^(border|rounded)/,
 	// Opacity
