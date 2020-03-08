@@ -31,6 +31,16 @@ const App = () => (
 
 <img src="screenshot.jpg" width="544">
 
+`tailwind` function returns a simple object with styles, which can be used in any React Native view, such as `<View>`, `<Text>` and others.
+
+```js
+tailwind('pt-12 items-center');
+//=> {
+//     paddingTop: 48,
+//     alignItems: 'center'
+//   }
+```
+
 ## API
 
 ### tailwind(classNames)
