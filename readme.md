@@ -4,6 +4,8 @@
 
 All styles are generated from Tailwind CSS source and not hard-coded, which makes it easy to keep this module up-to-date with latest changes in Tailwind CSS itself.
 
+![](header.jpg)
+
 ## Install
 
 ```
