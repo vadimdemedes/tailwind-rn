@@ -14,10 +14,7 @@ const tailwind = classNames =>  classNames.split(' ').reduce((currentStyles, cla
 	}, {});
 
 // Pass the name of a color (e.g. "blue-500") and receive a color value (e.g. "#4399e1")
-const getColor = name => {
-	const obj = tailwind(`bg-${name}`);
-	return obj.backgroundColor;
-};
+const getColor = name => tailwind(`bg-${name}`).backgroundColor;
 
 module.exports = tailwind;
 module.exports.default = tailwind;
