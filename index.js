@@ -4,19 +4,14 @@ const styles = require('./styles.json');
 // Pass a list of class names separated by a space, for example:
 // "bg-green-100 text-green-800 font-semibold")
 // and receive a styles object for use in React Native views
-const tailwind = classNames => {
-	const obj = {};
-
-	for (const className of classNames.split(' ')) {
+const tailwind = classNames =>  classNames.split(' ').reduce((currentStyles, className ) => {
 		if (styles[className]) {
-			Object.assign(obj, styles[className]);
+			return { ...currentStyles, ...styles[className] };
 		} else {
 			console.warn(`Unsupported Tailwind class: "${className}"`);
+			return currentStyles;
 		}
-	}
-
-	return obj;
-};
+	}, {});
 
 // Pass the name of a color (e.g. "blue-500") and receive a color value (e.g. "#4399e1")
 const getColor = name => {
