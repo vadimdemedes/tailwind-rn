@@ -86,7 +86,8 @@ const supportedUtilities = [
 	// Opacity
 	/^opacity-/,
 	// Pointer events
-	/^pointer-events-/
+	/^pointer-events-/,
+	/^outline-/
 ];
 
 const isUtilitySupported = utility => {
