@@ -28,12 +28,12 @@
 	],
 	"devDependencies": {
 		"@ava/babel": "^1.0.1",
-		"ava": "^3.5.0",
+		"ava": "^3.5.1",
 		"css": "^2.2.4",
 		"css-to-react-native": "^3.0.0",
-		"prettier": "^1.19.1",
+		"prettier": "^2.0.2",
 		"tailwindcss": "^1.2.0",
-		"xo": "^0.27.2"
+		"xo": "^0.28.0"
 	},
 	"ava": {
 		"babel": true
@@ -42,5 +42,10 @@
 		"useTabs": true,
 		"singleQuote": true,
 		"bracketSpacing": false
+	},
+	"xo": {
+		"rules": {
+			"unicorn/prevent-abbreviations": "off"
+		}
 	}
 }
