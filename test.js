@@ -19,3 +19,10 @@ test('ignore unknown classes', t => {
 test('get color value', t => {
 	t.is(getColor('blue-500'), '#4299e1');
 });
+
+test('ignore no value param', t => {
+	t.deepEqual(tailwind(null), {});
+	t.deepEqual(tailwind(false), {});
+	t.deepEqual(tailwind(undefined), {});
+	t.deepEqual(tailwind(0), {});
+});

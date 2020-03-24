@@ -7,6 +7,10 @@ const styles = require('./styles.json');
 const tailwind = classNames => {
 	const obj = {};
 
+	if (!classNames) {
+		return obj;
+	}
+
 	for (const className of classNames.split(' ')) {
 		if (styles[className]) {
 			Object.assign(obj, styles[className]);
