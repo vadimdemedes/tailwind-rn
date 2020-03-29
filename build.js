@@ -13,9 +13,9 @@ const remToPx = value => `${parseFloat(value) * 16}px`;
 
 const getStyles = rule => {
 	const styles = rule.declarations
-		.filter(({property}) => {
+		.filter(({property, value}) => {
 			// Skip line-height utilities without units
-			if (property === 'line-height') {
+			if (property === 'line-height' && !value.endsWith('rem')) {
 				return false;
 			}
 
@@ -71,7 +71,7 @@ const supportedUtilities = [
 	// Letter spacing
 	/^tracking-/,
 	// Line height
-	/^leading-/,
+	/^leading-\d+/,
 	// Text align, color
 	/^text-/,
 	// Text transform

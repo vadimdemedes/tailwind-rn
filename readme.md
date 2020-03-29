@@ -87,7 +87,7 @@ tailwind('pt-12 items-center');
 - [Font Style](https://tailwindcss.com/docs/font-style)
 - [Font Weight](https://tailwindcss.com/docs/font-weight)
 - [Letter Spacing](https://tailwindcss.com/docs/letter-spacing)
-- [Line Height](https://tailwindcss.com/docs/line-height)
+- [Line Height](https://tailwindcss.com/docs/line-height) (only fixed line-heights)
 - [Text Align](https://tailwindcss.com/docs/text-align)
 - [Text Color](https://tailwindcss.com/docs/text-color)
 - [Text Decoration](https://tailwindcss.com/docs/text-decoration)
