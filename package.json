@@ -15,11 +15,12 @@
 	"scripts": {
 		"build": "node build",
 		"prepare": "npm run build",
-		"test": "xo && ava"
+		"test": "xo && tsd && ava"
 	},
 	"files": [
 		"index.js",
-		"styles.json"
+		"styles.json",
+		"index.d.ts"
 	],
 	"keywords": [
 		"tailwind",
@@ -33,6 +34,7 @@
 		"css-to-react-native": "^3.0.0",
 		"prettier": "^1.19.1",
 		"tailwindcss": "^1.2.0",
+		"tsd": "^0.11.0",
 		"xo": "^0.27.2"
 	},
 	"ava": {
