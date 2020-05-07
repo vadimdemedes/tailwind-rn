@@ -87,6 +87,7 @@ const supportedUtilities = [
 	/^opacity-/,
 	// Pointer events
 	/^pointer-events-/,
+	// Outline
 	/^outline-/
 ];
 
