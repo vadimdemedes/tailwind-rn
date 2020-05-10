@@ -11,26 +11,36 @@ const {stylesheet} = css.parse(source);
 
 const remToPx = value => `${parseFloat(value) * 16}px`;
 
-const getStyles = rule => {
-	const styles = rule.declarations
-		.filter(({property}) => {
-			// Skip line-height utilities without units
-			if (property === 'line-height') {
-				return false;
-			}
+const getStyles = (rule) => {
+  const styles = rule.declarations
+    .filter(({ property, value }) => {
+      // skip usage of vars I don't think they do anything
+      if (value.includes("var(")) {
+        return false
+      }
 
-			return true;
-		})
-		.map(({property, value}) => {
-			if (value.endsWith('rem')) {
-				return [property, remToPx(value)];
-			}
+      // remove var properties
+      if (property.includes('--')) {
+        return false
+      }
 
-			return [property, value];
-		});
+      // Skip line-height utilities without units
+      if (property === 'line-height') {
+        return false
+      }
 
-	return cssToReactNative(styles);
-};
+      return true
+    })
+    .map(({ property, value }) => {
+      if (value.endsWith('rem')) {
+        return [property, remToPx(value)]
+      }
+
+      return [property, value]
+    })
+
+  return cssToReactNative(styles)
+}
 
 const supportedUtilities = [
 	// Flexbox
