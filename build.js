@@ -82,7 +82,8 @@ const supportedUtilities = [
 	// Background color
 	/^bg-(transparent|black|white|gray|red|orange|yellow|green|teal|blue|indigo|purple|pink)/,
 	// Border color, style, width, radius
-	/^(border|rounded)/,
+	/^border-(?!current)/,
+	/^rounded/,
 	// Opacity
 	/^opacity-/,
 	// Pointer events
