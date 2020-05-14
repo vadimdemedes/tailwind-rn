@@ -18,7 +18,11 @@ const getStyles = rule => {
 			if (property === 'line-height' && !value.endsWith('rem')) {
 				return false;
 			}
-
+			// Skip CSS variable : currentColor
+			if (value.endsWith("currentColor")) {
+				return false;
+			}
+			
 			return true;
 		})
 		.map(({property, value}) => {
@@ -122,6 +126,85 @@ for (const rule of stylesheet.rules) {
 styles.underline = {textDecorationLine: 'underline'};
 styles['line-through'] = {textDecorationLine: 'line-through'};
 styles['no-underline'] = {textDecorationLine: 'none'};
+
+// Shadow
+styles["shadow-xs"] = {
+	shadowOffset: {
+		width: 0,
+		height: 0,
+	},
+	shadowRadius: 1,
+	shadowColor: "rgba(0, 0, 0, 0.3)",
+	shadowOpacity: 1
+};
+styles["shadow-sm"] = {
+	shadowOffset: {
+	  width: 0,
+	  height: 1,
+	},
+	shadowRadius: 2,
+	shadowColor: "rgba(0, 0, 0, 0.05)",
+	shadowOpacity: 1
+};
+styles["shadow"] = {
+	shadowOffset: {
+	  width: 0,
+	  height: 1,
+	},
+	shadowRadius: 3,
+	shadowColor: "rgba(0, 0, 0, 0.2)",
+	shadowOpacity: 1,
+};
+styles["shadow-md"] = {
+	shadowOffset: {
+	  width: 0,
+	  height: 4,
+	},
+	shadowRadius: 6,
+	shadowColor: "rgba(0, 0, 0, 0.1)",
+	shadowOpacity: 1
+};
+styles["shadow-lg"] = {
+	shadowOffset: {
+	  width: 0,
+	  height: 10,
+	},
+	shadowRadius: 15,
+	shadowColor: "rgba(0, 0, 0, 0.15)",
+	shadowOpacity: 1
+};
+styles["shadow-xl"] = {
+	shadowOffset: {
+	  width: 0,
+	  height: 20,
+	},
+	shadowRadius: 25,
+	shadowColor: "rgba(0, 0, 0, 0.12)",
+	shadowOpacity: 1
+};
+styles["shadow-2xl"] = {
+	shadowOffset: {
+	  width: 0,
+	  height: 25,
+	},
+	shadowRadius: 50,
+	shadowColor: "rgba(0, 0, 0, 0.25)",
+	shadowOpacity: 1
+};
+styles["shadow-outline"] = {
+	borderWidth: 3,
+	borderColor: "rgba(66, 153, 225, 0.5)",
+	borderStyle: "solid"
+};
+styles["shadow-none"] = {
+	shadowOffset: {
+	  width: 0,
+	  height: 0,
+	},
+	shadowRadius: 0,
+	shadowColor: "black",
+	shadowOpacity: 1
+};
 
 fs.writeFileSync(
 	path.join(__dirname, 'styles.json'),
