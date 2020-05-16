@@ -89,7 +89,7 @@ tailwind('pt-12 items-center');
 - [Letter Spacing](https://tailwindcss.com/docs/letter-spacing)
 - [Line Height](https://tailwindcss.com/docs/line-height) (only fixed line-heights)
 - [Text Align](https://tailwindcss.com/docs/text-align)
-- [Text Color](https://tailwindcss.com/docs/text-color)
+- [Text Color](https://tailwindcss.com/docs/text-color) (all except `text-current`)
 - [Text Decoration](https://tailwindcss.com/docs/text-decoration)
 - [Text Transform](https://tailwindcss.com/docs/text-transform)
 
@@ -100,7 +100,7 @@ tailwind('pt-12 items-center');
 ### Borders
 
 - [Border Color](https://tailwindcss.com/docs/border-color)
-- [Border Style](https://tailwindcss.com/docs/border-style)
+- [Border Style](https://tailwindcss.com/docs/border-style) (all except `border-current`)
 - [Border Width](https://tailwindcss.com/docs/border-width)
 - [Border Radius](https://tailwindcss.com/docs/border-radius)
 

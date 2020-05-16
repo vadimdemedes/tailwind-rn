@@ -90,6 +90,11 @@ const supportedUtilities = [
 ];
 
 const isUtilitySupported = utility => {
+	// Skip utilities with `currentColor` values
+	if (['border-current', 'text-current'].includes(utility)) {
+		return false;
+	}
+
 	for (const supportedUtility of supportedUtilities) {
 		if (typeof supportedUtility === 'string' && supportedUtility === utility) {
 			return true;
