@@ -112,6 +112,10 @@ tailwind('pt-12 items-center');
 
 - [Pointer Events](https://tailwindcss.com/docs/pointer-events)
 
+### Only for React Native for Web
+
+- [Outline](https://tailwindcss.com/docs/outline)
+
 ## API
 
 ### tailwind(classNames)
