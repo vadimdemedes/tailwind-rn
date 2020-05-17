@@ -5,27 +5,27 @@ const styles = require('./styles.json');
 // "bg-green-100 text-green-800 font-semibold")
 // and receive a styles object for use in React Native views
 const tailwind = classNames => {
-	const obj = {};
+	const object = {};
 
 	if (!classNames) {
-		return obj;
+		return object;
 	}
 
 	for (const className of classNames.split(' ')) {
 		if (styles[className]) {
-			Object.assign(obj, styles[className]);
+			Object.assign(object, styles[className]);
 		} else {
 			console.warn(`Unsupported Tailwind class: "${className}"`);
 		}
 	}
 
-	return obj;
+	return object;
 };
 
 // Pass the name of a color (e.g. "blue-500") and receive a color value (e.g. "#4399e1")
 const getColor = name => {
-	const obj = tailwind(`bg-${name}`);
-	return obj.backgroundColor;
+	const object = tailwind(`bg-${name}`);
+	return object.backgroundColor;
 };
 
 module.exports = tailwind;

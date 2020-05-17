@@ -9,7 +9,7 @@ const pkgPath = require.resolve('tailwindcss').replace(pkgJson.main, '');
 const source = fs.readFileSync(path.join(pkgPath, pkgJson.style), 'utf8');
 const {stylesheet} = css.parse(source);
 
-const remToPx = value => `${parseFloat(value) * 16}px`;
+const remToPx = value => `${Number.parseFloat(value) * 16}px`;
 
 const getStyles = rule => {
 	const styles = rule.declarations
