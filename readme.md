@@ -90,12 +90,14 @@ tailwind('pt-12 items-center');
 - [Line Height](https://tailwindcss.com/docs/line-height) (only fixed line-heights)
 - [Text Align](https://tailwindcss.com/docs/text-align)
 - [Text Color](https://tailwindcss.com/docs/text-color) (all except `text-current`)
+- [Text Opacity](https://tailwindcss.com/docs/text-opacity)
 - [Text Decoration](https://tailwindcss.com/docs/text-decoration)
 - [Text Transform](https://tailwindcss.com/docs/text-transform)
 
 ### Backgrounds
 
 - [Background Color](https://tailwindcss.com/docs/background-color)
+- [Background Opacity](https://tailwindcss.com/docs/background-opacity)
 
 ### Borders
 

@@ -72,7 +72,7 @@ const supportedUtilities = [
 	/^tracking-/,
 	// Line height
 	/^leading-\d+/,
-	// Text align, color
+	// Text align, color, opacity
 	/^text-/,
 	// Text transform
 	'uppercase',
@@ -81,6 +81,8 @@ const supportedUtilities = [
 	'normal-case',
 	// Background color
 	/^bg-(transparent|black|white|gray|red|orange|yellow|green|teal|blue|indigo|purple|pink)/,
+	// Background opacity
+	/^bg-opacity-/,
 	// Border color, style, width, radius
 	/^(border|rounded)/,
 	// Opacity
