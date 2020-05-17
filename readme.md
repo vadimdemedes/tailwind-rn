@@ -102,6 +102,7 @@ tailwind('pt-12 items-center');
 ### Borders
 
 - [Border Color](https://tailwindcss.com/docs/border-color)
+- [Border Opacity](https://tailwindcss.com/docs/border-opacity)
 - [Border Style](https://tailwindcss.com/docs/border-style) (all except `border-current`)
 - [Border Width](https://tailwindcss.com/docs/border-width)
 - [Border Radius](https://tailwindcss.com/docs/border-radius)

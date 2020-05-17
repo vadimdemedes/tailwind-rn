@@ -83,7 +83,7 @@ const supportedUtilities = [
 	/^bg-(transparent|black|white|gray|red|orange|yellow|green|teal|blue|indigo|purple|pink)/,
 	// Background opacity
 	/^bg-opacity-/,
-	// Border color, style, width, radius
+	// Border color, style, width, radius, opacity
 	/^(border|rounded)/,
 	// Opacity
 	/^opacity-/,

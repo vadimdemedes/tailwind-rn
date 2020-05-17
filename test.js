@@ -20,10 +20,16 @@ test('ignore unknown classes', t => {
 
 test('support color opacity', t => {
 	t.deepEqual(
-		tailwind('text-blue-500 text-opacity-50 bg-blue-100 bg-opacity-50'),
+		tailwind(
+			'text-blue-500 text-opacity-50 bg-blue-100 bg-opacity-50 border-blue-100 border-opacity-50'
+		),
 		{
 			color: 'rgba(66, 153, 225, 0.5)',
-			backgroundColor: 'rgba(235, 248, 255, 0.5)'
+			backgroundColor: 'rgba(235, 248, 255, 0.5)',
+			borderTopColor: 'rgba(235, 248, 255, 0.5)',
+			borderRightColor: 'rgba(235, 248, 255, 0.5)',
+			borderBottomColor: 'rgba(235, 248, 255, 0.5)',
+			borderLeftColor: 'rgba(235, 248, 255, 0.5)'
 		}
 	);
 });
