@@ -1,13 +1,6 @@
 'use strict';
-const path = require('path');
-const fs = require('fs');
 const css = require('css');
 const cssToReactNative = require('css-to-react-native').default;
-const pkgJson = require('tailwindcss/package.json');
-
-const pkgPath = require.resolve('tailwindcss').replace(pkgJson.main, '');
-const source = fs.readFileSync(path.join(pkgPath, pkgJson.style), 'utf8');
-const {stylesheet} = css.parse(source);
 
 const remToPx = value => `${Number.parseFloat(value) * 16}px`;
 
@@ -110,27 +103,28 @@ const isUtilitySupported = utility => {
 	return false;
 };
 
-// Mapping of Tailwind class names to React Native styles
-const styles = {};
+module.exports = source => {
+	const {stylesheet} = css.parse(source);
 
-for (const rule of stylesheet.rules) {
-	if (rule.type === 'rule') {
-		for (const selector of rule.selectors) {
-			const utility = selector.replace(/^\./, '').replace('\\/', '/');
+	// Mapping of Tailwind class names to React Native styles
+	const styles = {};
 
-			if (isUtilitySupported(utility)) {
-				styles[utility] = getStyles(rule);
+	for (const rule of stylesheet.rules) {
+		if (rule.type === 'rule') {
+			for (const selector of rule.selectors) {
+				const utility = selector.replace(/^\./, '').replace('\\/', '/');
+
+				if (isUtilitySupported(utility)) {
+					styles[utility] = getStyles(rule);
+				}
 			}
 		}
 	}
-}
 
-// Additional styles that we're not able to parse correctly automatically
-styles.underline = {textDecorationLine: 'underline'};
-styles['line-through'] = {textDecorationLine: 'line-through'};
-styles['no-underline'] = {textDecorationLine: 'none'};
+	// Additional styles that we're not able to parse correctly automatically
+	styles.underline = {textDecorationLine: 'underline'};
+	styles['line-through'] = {textDecorationLine: 'line-through'};
+	styles['no-underline'] = {textDecorationLine: 'none'};
 
-fs.writeFileSync(
-	path.join(__dirname, 'styles.json'),
-	JSON.stringify(styles, null, '\t')
-);
+	return styles;
+};

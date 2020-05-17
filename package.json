@@ -9,29 +9,38 @@
 		"email": "vdemedes@gmail.com",
 		"url": "https://vadimdemedes.com"
 	},
+	"bin": {
+		"create-tailwind-rn": "cli.js"
+	},
 	"engines": {
 		"node": ">=10"
 	},
 	"scripts": {
-		"build": "node build",
+		"build": "node cli",
 		"prepare": "npm run build",
 		"test": "xo && tsd && ava"
 	},
 	"files": [
+		"build.js",
+		"cli.js",
 		"index.js",
-		"styles.json",
-		"index.d.ts"
+		"index.d.ts",
+		"styles.json"
 	],
 	"keywords": [
 		"tailwind",
 		"tailwindcss",
 		"react-native"
 	],
+	"dependencies": {
+		"css": "^2.2.4",
+		"css-to-react-native": "^3.0.0",
+		"meow": "^7.0.1",
+		"postcss": "^7.0.30"
+	},
 	"devDependencies": {
 		"@ava/babel": "^1.0.1",
 		"ava": "^3.5.0",
-		"css": "^2.2.4",
-		"css-to-react-native": "^3.0.0",
 		"prettier": "^1.19.1",
 		"tailwindcss": "^1.2.0",
 		"tsd": "^0.11.0",
