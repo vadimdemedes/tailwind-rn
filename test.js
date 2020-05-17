@@ -34,6 +34,16 @@ test('support color opacity', t => {
 	);
 });
 
+test('ignore non-string values when transforming CSS variables', t => {
+	t.deepEqual(tailwind('bg-blue-500 p-12'), {
+		backgroundColor: 'rgba(66, 153, 225, 1)',
+		paddingTop: 48,
+		paddingRight: 48,
+		paddingBottom: 48,
+		paddingLeft: 48
+	});
+});
+
 test('get color value', t => {
 	t.is(getColor('blue-500'), 'rgba(66, 153, 225, 1)');
 });
