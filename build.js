@@ -93,6 +93,9 @@ const getStyles = rule => {
 			if (value.endsWith('rem')) {
 				return [property, remToPx(value)];
 			}
+			if (property === 'font-family') {
+				return [property, value.split(', ')[0]];
+			}
 
 			return [property, value];
 		});
@@ -134,7 +137,7 @@ const supportedUtilities = [
 	// Font style
 	/^(not-)?italic$/,
 	// Font weight
-	/^font-(family|hairline|thin|light|normal|medium|semibold|bold|extrabold|black)/,
+	/^font-/,
 	// Letter spacing
 	/^tracking-/,
 	// Line height
