@@ -4,7 +4,7 @@ const cssToReactNative = require('css-to-react-native').default;
 const remToPx = value => `${Number.parseFloat(value) * 16}px`;
 
 function translateValues(value) {
-	let translatedValue = value;
+	const translatedValue = value;
 
 	if (translatedValue === 'transparent') {
 		return 'rgba(0,0,0,0)';
@@ -14,16 +14,16 @@ function translateValues(value) {
 		return translatedValue;
 	}
 
-	if (value.search(/^-?[0-9]+$/) !== -1) {
-		return parseInt(translatedValue);
+	if (value.search(/^-?\d+$/) !== -1) {
+		return Number.parseInt(translatedValue, 10);
 	}
 
-	if (value.search(/-?\.[0-9]+$/) !== -1) {
-		return parseFloat(translatedValue);
+	if (value.search(/-?\.\d+$/) !== -1) {
+		return Number.parseFloat(translatedValue);
 	}
 
-	if (value.search(/^[0-9]+$/) !== -1) {
-		return parseInt(translatedValue);
+	if (value.search(/^\d+$/) !== -1) {
+		return Number.parseInt(translatedValue, 10);
 	}
 
 	return translatedValue;
@@ -36,7 +36,8 @@ function convertShadow(rule) {
 		);
 	}
 
-	let results, color, elevation;
+	let color;
+	let elevation;
 
 	if (
 		rule.declarations[0].value === 'none' ||
@@ -51,17 +52,17 @@ function convertShadow(rule) {
 		};
 	}
 
-	results = rule.declarations[0].value.match(
-		/^([0-9]+)p?x?\s([0-9]+)p?x?\s([0-9]+)p?x?\s(-?[0-9]+)?p?x?\s?(rgba?\(.+?\))?(#[a-zA-Z0-9]{3,8})?/
+	const results = rule.declarations[0].value.match(
+		/^(\d+)p?x?\s(\d+)p?x?\s(\d+)p?x?\s(-?\d+)?p?x?\s?(rgba?\(.+?\))?(#[a-zA-Z\d]{3,8})?/
 	);
 
-	elevation = rule.declarations[0].value.match(/,(?:\s+)?(-?[0-9]+)$/);
+	elevation = rule.declarations[0].value.match(/,(?:\s+)?(-?\d+)$/);
 
 	color = results[5];
 
-	elevation = elevation
-		? translateValues(elevation[1])
-		: translateValues(results[3]) / 2;
+	elevation = elevation ?
+		translateValues(elevation[1]) :
+		translateValues(results[3]) / 2;
 
 	if (typeof color === 'undefined') {
 		color = results[6];
@@ -93,6 +94,7 @@ const getStyles = rule => {
 			if (value.endsWith('rem')) {
 				return [property, remToPx(value)];
 			}
+
 			if (property === 'font-family') {
 				return [property, value.split(', ')[0]];
 			}
@@ -168,7 +170,7 @@ const isUtilitySupported = utility => {
 		return false;
 	}
 
-	// skip inner shadows
+	// Skip inner shadows
 	if (['shadow-outline', 'shadow-inner'].includes(utility)) {
 		return false;
 	}
@@ -198,7 +200,7 @@ module.exports = source => {
 				const utility = selector.replace(/^\./, '').replace('\\/', '/');
 
 				if (isUtilitySupported(utility)) {
-					if (/^shadow-/.test(utility)) {
+					if (utility.startsWith('shadow-')) {
 						styles[utility] = convertShadow(rule);
 					} else {
 						styles[utility] = getStyles(rule);
