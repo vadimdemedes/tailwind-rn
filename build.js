@@ -161,7 +161,7 @@ const supportedUtilities = [
 	/^opacity-/,
 	// Pointer events
 	/^pointer-events-/,
-	/^shadow-/
+	/^shadow/
 ];
 
 const isUtilitySupported = utility => {
@@ -184,7 +184,7 @@ const isUtilitySupported = utility => {
 			return true;
 		}
 	}
-
+	console.log(utility)
 	return false;
 };
 
