@@ -162,7 +162,7 @@ const supportedUtilities = [
 	/^opacity-/,
 	// Pointer events
 	/^pointer-events-/,
-	/^shadow-/,
+	/^shadow/,
 	/^translate-/,
 	/^scale-/
 ];
@@ -203,7 +203,7 @@ module.exports = source => {
 				const utility = selector.replace(/^\./, '').replace('\\/', '/');
 
 				if (isUtilitySupported(utility)) {
-					if (utility.startsWith('shadow-')) {
+					if (utility.startsWith('shadow')) {
 						styles[utility] = convertShadow(rule);
 					} else {
 						styles[utility] = getStyles(rule);
