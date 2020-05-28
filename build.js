@@ -101,6 +101,7 @@ const getStyles = rule => {
 
 			return [property, value];
 		});
+
 	return cssToReactNative(styles);
 };
 
@@ -161,7 +162,9 @@ const supportedUtilities = [
 	/^opacity-/,
 	// Pointer events
 	/^pointer-events-/,
-	/^shadow/
+	/^shadow-/,
+	/^translate-/,
+	/^scale-/
 ];
 
 const isUtilitySupported = utility => {
@@ -184,7 +187,7 @@ const isUtilitySupported = utility => {
 			return true;
 		}
 	}
-	console.log(utility)
+
 	return false;
 };
 
