@@ -60,9 +60,9 @@ function convertShadow(rule) {
 
 	color = results[5];
 
-	elevation = elevation ?
-		translateValues(elevation[1]) :
-		translateValues(results[3]) / 2;
+	elevation = elevation
+		? translateValues(elevation[1])
+		: translateValues(results[3]) / 2;
 
 	if (typeof color === 'undefined') {
 		color = results[6];
@@ -164,7 +164,8 @@ const supportedUtilities = [
 	/^pointer-events-/,
 	/^shadow/,
 	/^translate-/,
-	/^scale-/
+	/^scale-/,
+	/^font-/
 ];
 
 const isUtilitySupported = utility => {
