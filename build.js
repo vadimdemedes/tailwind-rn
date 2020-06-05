@@ -165,7 +165,9 @@ const supportedUtilities = [
 	/^shadow/,
 	/^translate-/,
 	/^scale-/,
-	/^font-/
+	/^font-/,
+	/^align-/,
+	/^content-/
 ];
 
 const isUtilitySupported = utility => {
