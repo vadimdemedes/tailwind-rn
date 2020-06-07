@@ -30,7 +30,7 @@ const create = styles => {
 			return object;
 		}
 
-		for (const className of classNames.split(' ')) {
+		for (const className of classNames.replace(/\s+/g, ' ').trim().split(' ')) {
 			if (styles[className]) {
 				Object.assign(object, styles[className]);
 			} else {

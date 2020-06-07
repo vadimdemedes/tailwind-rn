@@ -54,3 +54,18 @@ test('ignore no value param', t => {
 	t.deepEqual(tailwind(undefined), {});
 	t.deepEqual(tailwind(0), {});
 });
+
+test('ignore extra spaces', t => {
+	t.deepEqual(tailwind('text-blue-500  bg-blue-100'), {
+		color: 'rgba(66, 153, 225, 1)',
+		backgroundColor: 'rgba(235, 248, 255, 1)'
+	});
+
+	t.deepEqual(tailwind(`
+		text-blue-500
+		bg-blue-100
+	`), {
+		color: 'rgba(66, 153, 225, 1)',
+		backgroundColor: 'rgba(235, 248, 255, 1)'
+	});
+});
