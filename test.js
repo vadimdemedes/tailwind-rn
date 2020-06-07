@@ -55,7 +55,7 @@ test('ignore no value param', t => {
 	t.deepEqual(tailwind(0), {});
 });
 
-test('it ignore extra spaces', t => {
+test('ignore extra spaces', t => {
 	t.deepEqual(tailwind('text-blue-500  bg-blue-100'), {
 		color: 'rgba(66, 153, 225, 1)',
 		backgroundColor: 'rgba(235, 248, 255, 1)'
