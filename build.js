@@ -89,11 +89,11 @@ const isUtilitySupported = (utility, customColors = []) => {
 	if (['border-current', 'text-current'].includes(utility)) {
 		return false;
 	}
-	
+
 	const allSupportedUtilities = [
-          ...supportedUtilities,
-          new RegExp(`^bg-(${customColors.join('|')})`)
-        ]
+		...supportedUtilities,
+		new RegExp(`^bg-(${customColors.join('|')})`)
+	];
 
 	for (const supportedUtility of allSupportedUtilities) {
 		if (typeof supportedUtility === 'string' && supportedUtility === utility) {
@@ -109,9 +109,9 @@ const isUtilitySupported = (utility, customColors = []) => {
 };
 
 /**
-* @param source {String} CSS
-* @param customColors {String[]} Custom colors provided in tailwind.config
-*/
+ * @param source {String} CSS
+ * @param customColors {String[]} Custom colors provided in tailwind.config
+ */
 module.exports = (source, customColors = []) => {
 	const {stylesheet} = css.parse(source);
 
