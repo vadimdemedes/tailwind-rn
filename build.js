@@ -84,13 +84,18 @@ const supportedUtilities = [
 	/^pointer-events-/
 ];
 
-const isUtilitySupported = utility => {
+const isUtilitySupported = (utility, customColors = []) => {
 	// Skip utilities with `currentColor` values
 	if (['border-current', 'text-current'].includes(utility)) {
 		return false;
 	}
+	
+	const allSupportedUtilities = [
+          ...supportedUtilities,
+          new RegExp(`^bg-(${customColors.join('|')})`)
+        ]
 
-	for (const supportedUtility of supportedUtilities) {
+	for (const supportedUtility of allSupportedUtilities) {
 		if (typeof supportedUtility === 'string' && supportedUtility === utility) {
 			return true;
 		}
@@ -103,7 +108,11 @@ const isUtilitySupported = utility => {
 	return false;
 };
 
-module.exports = source => {
+/**
+* @param source {String} CSS
+* @param customColors {String[]} Custom colors provided in tailwind.config
+*/
+module.exports = (source, customColors = []) => {
 	const {stylesheet} = css.parse(source);
 
 	// Mapping of Tailwind class names to React Native styles
@@ -114,7 +123,7 @@ module.exports = source => {
 			for (const selector of rule.selectors) {
 				const utility = selector.replace(/^\./, '').replace('\\/', '/');
 
-				if (isUtilitySupported(utility)) {
+				if (isUtilitySupported(utility, customColors)) {
 					styles[utility] = getStyles(rule);
 				}
 			}
