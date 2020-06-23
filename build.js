@@ -73,7 +73,7 @@ const supportedUtilities = [
 	'capitalize',
 	'normal-case',
 	// Background color, opacity
-	/^bg-(?!fixed|local|scroll|bottom|center|left|left-.+|left-top|right|right-.+|top|repeat|repeat-.+|no-repeat|auto|cover|contain).+/,
+	/^bg-(?!fixed|local|scroll|bottom|center|left|left-.+|left-top|right|right-.+|top|repeat|repeat-.+|no-repeat|auto|cover|contain)/,
 	// Border color, style, width, radius, opacity
 	/^(border|rounded)/,
 	// Opacity
