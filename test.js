@@ -48,6 +48,10 @@ test('get color value', t => {
 	t.is(getColor('blue-500'), 'rgba(66, 153, 225, 1)');
 });
 
+test('get color with opacity value', t => {
+	t.is(getColor('blue-500 opacity-50'), 'rgba(66, 153, 225, 0.5)');
+});
+
 test('ignore no value param', t => {
 	t.deepEqual(tailwind(null), {});
 	t.deepEqual(tailwind(false), {});

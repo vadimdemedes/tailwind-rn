@@ -41,9 +41,10 @@ const create = styles => {
 		return useVariables(object);
 	};
 
-	// Pass the name of a color (e.g. "blue-500") and receive a color value (e.g. "#4399e1")
+	// Pass the name of a color (e.g. "blue-500") and receive a color value (e.g. "#4399e1"),
+	// or a color and opacity (e.g. "black opacity-50") and get a color with opacity (e.g. "rgba(0,0,0,0.5)")
 	const getColor = name => {
-		const object = tailwind(`bg-${name}`);
+		const object = tailwind(name.split(' ').map(c => `bg-${c}`).join(' '));
 		return object.backgroundColor;
 	};
 
