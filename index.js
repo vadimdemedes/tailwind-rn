@@ -49,7 +49,7 @@ const addLetterSpacing = (tailwindStyles, style, classNames) => {
 
 	if (!fontSizeMatches) {
 		throw new Error(
-			"Font size is required when applying letter spacing, e.g. 'text-lg tracking-tighter'"
+			"Font size is required when applying letter spacing, e.g. 'text-lg tracking-tighter'" // eslint-disable-line quotes
 		);
 	}
 
@@ -58,7 +58,7 @@ const addLetterSpacing = (tailwindStyles, style, classNames) => {
 	const fontSizeClass = fontSizeMatches[0];
 	const {fontSize} = tailwindStyles[fontSizeClass];
 
-	style.letterSpacing = parseFloat(letterSpacing) * fontSize;
+	style.letterSpacing = Number.parseFloat(letterSpacing) * fontSize;
 };
 
 const create = tailwindStyles => {
