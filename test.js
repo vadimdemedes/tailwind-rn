@@ -102,3 +102,35 @@ test('support font-variant-numeric', t => {
 		}
 	);
 });
+
+test('support letter spacing', t => {
+	t.deepEqual(tailwind('text-base tracking-tighter'), {
+		fontSize: 16,
+		letterSpacing: -0.8
+	});
+
+	t.deepEqual(tailwind('text-base tracking-tight'), {
+		fontSize: 16,
+		letterSpacing: -0.4
+	});
+
+	t.deepEqual(tailwind('text-base tracking-normal'), {
+		fontSize: 16,
+		letterSpacing: 0
+	});
+
+	t.deepEqual(tailwind('text-base tracking-wide'), {
+		fontSize: 16,
+		letterSpacing: 0.4
+	});
+
+	t.deepEqual(tailwind('text-base tracking-wider'), {
+		fontSize: 16,
+		letterSpacing: 0.8
+	});
+
+	t.deepEqual(tailwind('text-base tracking-widest'), {
+		fontSize: 16,
+		letterSpacing: 1.6
+	});
+});

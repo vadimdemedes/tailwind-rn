@@ -33,7 +33,35 @@ const addFontVariant = (style, classNames) => {
 	}
 };
 
-const create = styles => {
+// Letter spacing also needs a special treatment, because its value is set
+// in em unit, that's why it requires a font size to be set too
+const FONT_SIZE_REGEX = /text-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl|6xl)/;
+const LETTER_SPACING_REGEX = /(tracking-[a-z]+)/;
+
+const addLetterSpacing = (tailwindStyles, style, classNames) => {
+	const letterSpacingMatches = LETTER_SPACING_REGEX.exec(classNames);
+
+	if (!letterSpacingMatches) {
+		return;
+	}
+
+	const fontSizeMatches = FONT_SIZE_REGEX.exec(classNames);
+
+	if (!fontSizeMatches) {
+		throw new Error(
+			"Font size is required when applying letter spacing, e.g. 'text-lg tracking-tighter'"
+		);
+	}
+
+	const letterSpacingClass = letterSpacingMatches[0];
+	const {letterSpacing} = tailwindStyles[letterSpacingClass];
+	const fontSizeClass = fontSizeMatches[0];
+	const {fontSize} = tailwindStyles[fontSizeClass];
+
+	style.letterSpacing = parseFloat(letterSpacing) * fontSize;
+};
+
+const create = tailwindStyles => {
 	// Pass a list of class names separated by a space, for example:
 	// "bg-green-100 text-green-800 font-semibold")
 	// and receive a styles object for use in React Native views
@@ -45,13 +73,17 @@ const create = styles => {
 		}
 
 		addFontVariant(style, classNames);
+		addLetterSpacing(tailwindStyles, style, classNames);
 
-		for (const className of classNames
+		const separateClassNames = classNames
 			.replace(/\s+/g, ' ')
 			.trim()
-			.split(' ')) {
-			if (styles[className]) {
-				Object.assign(style, styles[className]);
+			.split(' ')
+			.filter(className => !className.startsWith('tracking-'));
+
+		for (const className of separateClassNames) {
+			if (tailwindStyles[className]) {
+				Object.assign(style, tailwindStyles[className]);
 			} else {
 				console.warn(`Unsupported Tailwind class: "${className}"`);
 			}
