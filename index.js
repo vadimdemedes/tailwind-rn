@@ -1,4 +1,6 @@
 'use strict';
+const matchAll = require('match-all');
+
 // Tailwind started using CSS variables for color opacity since v1.4.0,
 // this helper adds a primitive support for these
 const useVariables = object => {
@@ -24,9 +26,7 @@ const useVariables = object => {
 const FONT_VARIANT_REGEX = /(oldstyle-nums|lining-nums|tabular-nums|proportional-nums)/g;
 
 const addFontVariant = (style, classNames) => {
-	const matches = [...classNames.matchAll(FONT_VARIANT_REGEX)].map(
-		match => match[0]
-	);
+	const matches = matchAll(classNames, FONT_VARIANT_REGEX).toArray();
 
 	if (matches.length > 0) {
 		style.fontVariant = matches;

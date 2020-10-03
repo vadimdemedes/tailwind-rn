@@ -35,6 +35,7 @@
 	"dependencies": {
 		"css": "^2.2.4",
 		"css-to-react-native": "^3.0.0",
+		"match-all": "^1.2.6",
 		"meow": "^7.0.1",
 		"postcss": "^7.0.30"
 	},
