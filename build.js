@@ -54,7 +54,7 @@ const supportedUtilities = [
 	// Height
 	/^(h-\d+|h-px|h-full)/,
 	// Min/Max width/height
-	/^(min-w-|max-w-|min-h-0|min-h-full|max-h-full)/,
+	/^(min-w-|max-w-|min-h-0|min-h-full|max-h-full|max-h-\d+)/,
 	// Font size
 	/^text-/,
 	// Font style
