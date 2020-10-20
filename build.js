@@ -54,7 +54,7 @@ const supportedUtilities = [
 	// Height
 	/^(h-\d+|h-px|h-full)/,
 	// Min/Max width/height
-	/^(min-w-|max-w-|min-h-0|min-h-full|max-h-full)/,
+	/^(min-w-|max-w-|min-h-|max-h-)/,
 	// Font size
 	/^text-/,
 	// Font style
@@ -86,7 +86,12 @@ const supportedUtilities = [
 
 const isUtilitySupported = utility => {
 	// Skip utilities with `currentColor` values
-	if (['border-current', 'text-current'].includes(utility)) {
+	// Skip utilities with vh units
+	if (
+		['border-current', 'text-current', 'max-h-screen', 'min-h-screen'].includes(
+			utility
+		)
+	) {
 		return false;
 	}
 
