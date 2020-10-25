@@ -25,7 +25,7 @@ const getStyles = rule => {
 	return cssToReactNative(styles);
 };
 
-const unsupportedProperties = [
+const unsupportedProperties = new Set([
 	'box-sizing',
 	'float',
 	'clear',
@@ -89,7 +89,7 @@ const unsupportedProperties = [
 	'fill',
 	'stroke',
 	'stroke-width'
-];
+]);
 
 const isUtilitySupported = (utility, rule) => {
 	// Skip utilities with pseudo-selectors
@@ -106,15 +106,15 @@ const isUtilitySupported = (utility, rule) => {
 			'sr-only',
 			'not-sr-only'
 		].includes(utility) ||
-		/^(space|placeholder|from|via|to|divide)\-/.test(utility) ||
-		/^\-?(scale|rotate|translate|skew)\-/.test(utility)
+		/^(space|placeholder|from|via|to|divide)-/.test(utility) ||
+		/^-?(scale|rotate|translate|skew)-/.test(utility)
 	) {
 		return false;
 	}
 
 	// Skip utilities with unsupported properties
 	for (const {property, value} of rule.declarations) {
-		if (unsupportedProperties.includes(property)) {
+		if (unsupportedProperties.has(property)) {
 			return false;
 		}
 
