@@ -65,11 +65,76 @@ test('ignore extra spaces', t => {
 		backgroundColor: 'rgba(235, 248, 255, 1)'
 	});
 
-	t.deepEqual(tailwind(`
+	t.deepEqual(
+		tailwind(`
 		text-blue-500
 		bg-blue-100
-	`), {
-		color: 'rgba(66, 153, 225, 1)',
-		backgroundColor: 'rgba(235, 248, 255, 1)'
+	`),
+		{
+			color: 'rgba(66, 153, 225, 1)',
+			backgroundColor: 'rgba(235, 248, 255, 1)'
+		}
+	);
+});
+
+test('support font-variant-numeric', t => {
+	t.deepEqual(tailwind('oldstyle-nums'), {
+		fontVariant: ['oldstyle-nums']
+	});
+
+	t.deepEqual(tailwind('lining-nums'), {
+		fontVariant: ['lining-nums']
+	});
+
+	t.deepEqual(tailwind('tabular-nums'), {
+		fontVariant: ['tabular-nums']
+	});
+
+	t.deepEqual(tailwind('proportional-nums'), {
+		fontVariant: ['proportional-nums']
+	});
+
+	t.deepEqual(
+		tailwind('oldstyle-nums lining-nums tabular-nums proportional-nums'),
+		{
+			fontVariant: [
+				'oldstyle-nums',
+				'lining-nums',
+				'tabular-nums',
+				'proportional-nums'
+			]
+		}
+	);
+});
+
+test('support letter spacing', t => {
+	t.deepEqual(tailwind('text-base tracking-tighter'), {
+		fontSize: 16,
+		letterSpacing: -0.8
+	});
+
+	t.deepEqual(tailwind('text-base tracking-tight'), {
+		fontSize: 16,
+		letterSpacing: -0.4
+	});
+
+	t.deepEqual(tailwind('text-base tracking-normal'), {
+		fontSize: 16,
+		letterSpacing: 0
+	});
+
+	t.deepEqual(tailwind('text-base tracking-wide'), {
+		fontSize: 16,
+		letterSpacing: 0.4
+	});
+
+	t.deepEqual(tailwind('text-base tracking-wider'), {
+		fontSize: 16,
+		letterSpacing: 0.8
+	});
+
+	t.deepEqual(tailwind('text-base tracking-widest'), {
+		fontSize: 16,
+		letterSpacing: 1.6
 	});
 });
