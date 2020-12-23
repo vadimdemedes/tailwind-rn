@@ -122,7 +122,10 @@ const isUtilitySupported = (utility, rule) => {
 			return false;
 		}
 
-		if (property === 'overflow' && !['visible', 'hidden'].includes(value)) {
+		if (
+			property === 'overflow' &&
+			!['visible', 'hidden', 'scroll'].includes(value)
+		) {
 			return false;
 		}
 
