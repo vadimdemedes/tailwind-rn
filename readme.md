@@ -196,6 +196,19 @@ getColor('blue-500');
 //=> '#ebf8ff'
 ```
 
+To get a color with opacity:
+
+```js
+import {getColor} from 'tailwind-rn';
+
+getColor('blue-500 opacity-50');
+//=> 'rgba(66, 153, 225, 0.5)'
+```
+
+You can use Tailwind's values for [color](https://tailwindcss.com/docs/background-color) and [opacity](https://tailwindcss.com/docs/background-opacity).
+
+> NOTE: For _color_ you must NOT include the `bg-` prefix.
+
 ### create(styles)
 
 Create `tailwind()` and `getColor()` functions, which use custom styles.
