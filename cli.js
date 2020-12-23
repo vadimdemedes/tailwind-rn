@@ -12,7 +12,6 @@ meow(`
 `);
 
 const source = `
-@tailwind base;
 @tailwind components;
 @tailwind utilities;
 `;
