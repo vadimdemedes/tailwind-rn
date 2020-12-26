@@ -1,5 +1,5 @@
 import test from 'ava';
-import tailwind, {getColor} from '.';
+import tailwind, {getColor, setStyles} from '.';
 
 test('get styles for one class', t => {
 	t.deepEqual(tailwind('text-blue-500'), {color: 'rgba(59, 130, 246, 1)'});
@@ -143,4 +143,19 @@ test('support letter spacing', t => {
 		letterSpacing: 1.6,
 		lineHeight: 24
 	});
+});
+
+test('tailwind function is singleton', t => {
+	const before = tailwind('bg-black');
+
+	setStyles({
+		'bg-black': {
+			'--tw-bg-opacity': 1,
+			backgroundColor: 'rgba(255, 255, 255, var(--tw-bg-opacity))'
+		}
+	});
+
+	const after = tailwind('bg-black');
+	t.notDeepEqual(before, after);
+	t.deepEqual(after, tailwind('bg-black'));
 });

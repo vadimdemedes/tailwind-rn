@@ -61,50 +61,54 @@ const addLetterSpacing = (tailwindStyles, style, classNames) => {
 	style.letterSpacing = Number.parseFloat(letterSpacing) * fontSize;
 };
 
-const create = tailwindStyles => {
+let tailwindStyles;
+const tailwind = classNames => {
+	const style = {};
+
+	if (!classNames) {
+		return style;
+	}
+
+	addFontVariant(style, classNames);
+	addLetterSpacing(tailwindStyles, style, classNames);
+
+	const separateClassNames = classNames
+		.replace(/\s+/g, ' ')
+		.trim()
+		.split(' ')
+		.filter(className => !className.startsWith('tracking-'));
+
+	for (const className of separateClassNames) {
+		if (tailwindStyles[className]) {
+			Object.assign(style, tailwindStyles[className]);
+		} else {
+			console.warn(`Unsupported Tailwind class: "${className}"`);
+		}
+	}
+
+	return useVariables(style);
+};
+
+// Pass the name of a color (e.g. "blue-500") and receive a color value (e.g. "#4399e1"),
+// or a color and opacity (e.g. "black opacity-50") and get a color with opacity (e.g. "rgba(0,0,0,0.5)")
+const getColor = name => {
+	const style = tailwind(name.split(' ').map(className => `bg-${className}`).join(' '));
+	return style.backgroundColor;
+};
+
+const create = injectedTailwindStyles => {
 	// Pass a list of class names separated by a space, for example:
 	// "bg-green-100 text-green-800 font-semibold")
 	// and receive a styles object for use in React Native views
-	const tailwind = classNames => {
-		const style = {};
-
-		if (!classNames) {
-			return style;
-		}
-
-		addFontVariant(style, classNames);
-		addLetterSpacing(tailwindStyles, style, classNames);
-
-		const separateClassNames = classNames
-			.replace(/\s+/g, ' ')
-			.trim()
-			.split(' ')
-			.filter(className => !className.startsWith('tracking-'));
-
-		for (const className of separateClassNames) {
-			if (tailwindStyles[className]) {
-				Object.assign(style, tailwindStyles[className]);
-			} else {
-				console.warn(`Unsupported Tailwind class: "${className}"`);
-			}
-		}
-
-		return useVariables(style);
-	};
-
-	// Pass the name of a color (e.g. "blue-500") and receive a color value (e.g. "#4399e1"),
-	// or a color and opacity (e.g. "black opacity-50") and get a color with opacity (e.g. "rgba(0,0,0,0.5)")
-	const getColor = name => {
-		const style = tailwind(name.split(' ').map(className => `bg-${className}`).join(' '));
-		return style.backgroundColor;
-	};
+	tailwindStyles = injectedTailwindStyles;
 
 	return {tailwind, getColor};
 };
 
-const {tailwind, getColor} = create(require('./styles.json'));
+create(require('./styles.json'));
 
 module.exports = tailwind;
 module.exports.default = tailwind;
 module.exports.getColor = getColor;
 module.exports.create = create;
+module.exports.setStyles = create;

@@ -138,42 +138,20 @@ Add this file to your version control system, because it's going to be needed wh
 $ npx create-tailwind-rn
 ```
 
-#### 3. Create a custom `tailwind()` function
+#### 3. Apply custom styles to `tailwind()` function
 
-Use `create()` function to generate the same `tailwind()` and `getColor()` functions, but with your custom styles applied.
+Use `setStyles()` function to applu your custom styles.
 
 ```js
-import {create} from 'tailwind-rn';
+import {setStyles} from 'tailwind-rn';
 import styles from './styles.json';
 
-const {tailwind, getColor} = create(styles);
-
+setStyles(styles);
 tailwind('text-blue-500 text-opacity-50');
 //=> {color: 'rgba(66, 153, 225, 0.5)'}
 ```
 
-Initializing `tailwind-rn` like that in every file you use it is not convenient.
-I'd recommend creating a `tailwind.js` file where you do it once and import it everywhere instead:
-
-**tailwind.js**
-
-```js
-import {create} from 'tailwind-rn';
-import styles from './styles.json';
-
-const {tailwind, getColor} = create(styles);
-export {tailwind, getColor};
-```
-
-You could also create an [alias](https://medium.com/@sterlingcobb/adding-alias-to-create-react-native-app-crna-in-2-minutes-45574f4a7729) for that file, so that you could import it using an absolute path from anywhere in your project:
-
-```js
-// Before
-import {tailwind} from '../../../tailwind';
-
-// After
-import {tailwind} from 'tailwind';
-```
+`tailwind-rn` is written with singleton pattern. Once you invoke `setStyles`, `tailwind` function will be affected to all of your workspace. Better call `setStyles` once in your application.
 
 ## API
 
