@@ -6,3 +6,4 @@ export function create(
 	tailwind: (classNames: string) => {[key: string]: string};
 	getColor: (color: string) => string;
 };
+export function setStyles(styles: object): void;

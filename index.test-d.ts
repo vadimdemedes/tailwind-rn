@@ -1,8 +1,9 @@
 import {expectType} from 'tsd';
-import tailwind, {getColor, create} from '.';
+import tailwind, {getColor, create, setStyles} from '.';
 
 expectType<{[key: string]: string}>(tailwind('bg-blue-200'));
 expectType<string>(getColor('blue-200'));
 expectType<{[key: string]: string}>(create({}).tailwind('bg-blue-200'));
 expectType<string>(create({}).getColor('blue-200'));
 expectType<string>(create({}).getColor('blue-200 opacity-50'));
+expectType<void>(setStyles({}));
