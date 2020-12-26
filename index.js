@@ -96,11 +96,15 @@ const getColor = name => {
 	return style.backgroundColor;
 };
 
-const create = injectedTailwindStyles => {
+const setStyles = injectedTailwindStyles => {
 	// Pass a list of class names separated by a space, for example:
 	// "bg-green-100 text-green-800 font-semibold")
 	// and receive a styles object for use in React Native views
 	tailwindStyles = injectedTailwindStyles;
+};
+
+const create = injectedTailwindStyles => {
+	setStyles(injectedTailwindStyles);
 
 	return {tailwind, getColor};
 };
@@ -111,4 +115,4 @@ module.exports = tailwind;
 module.exports.default = tailwind;
 module.exports.getColor = getColor;
 module.exports.create = create;
-module.exports.setStyles = create;
+module.exports.setStyles = setStyles;
