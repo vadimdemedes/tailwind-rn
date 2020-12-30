@@ -17,6 +17,7 @@ $ npm install tailwind-rn
 Import `tailwind-rn` module and use any of the [supported utilities](#supported-utilities) from [Tailwind CSS](https://tailwindcss.com) in your [React Native](https://reactnative.dev) views.
 
 ```js
+import React from 'react';
 import {SafeAreaView, View, Text} from 'react-native';
 import tailwind from 'tailwind-rn';
 
@@ -31,6 +32,8 @@ const App = () => (
 		</View>
 	</SafeAreaView>
 );
+
+export default App;
 ```
 
 <img src="screenshot.jpg" width="544">
