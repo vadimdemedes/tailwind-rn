@@ -1,5 +1,8 @@
 import test from 'ava';
-import tailwind, {getColor} from '.';
+import create from './create';
+import defaultStyles from '../styles.json';
+
+const {tailwind, getColor} = create(defaultStyles, []);
 
 test('get styles for one class', t => {
 	t.deepEqual(tailwind('text-blue-500'), {color: 'rgba(59, 130, 246, 1)'});
@@ -142,5 +145,11 @@ test('support letter spacing', t => {
 		fontSize: 16,
 		letterSpacing: 1.6,
 		lineHeight: 24
+	});
+});
+
+test('ignore breakpoints classes', t => {
+	t.deepEqual(tailwind('text-blue-500 sm:text-red-500 md:text-red-500 lg:text-red-500 xl:text-red-500 2xl:text-red-500'), {
+		color: 'rgba(59, 130, 246, 1)'
 	});
 });
