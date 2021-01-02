@@ -193,7 +193,7 @@ module.exports = (source, config) => {
 
 	// Extract breakpoints from tailwind config
 	const screens = {};
-	const breakpoints = config?.theme?.screens || {};
+	const breakpoints = config && config.theme && config.theme.screens || {};
 	const screenKeys = Object.keys(breakpoints);
 
 	for (const screen of screenKeys) {
