@@ -1,5 +1,6 @@
 
 'use strict';
+const {useMemo} = require('react');
 const {useWindowDimensions} = require('react-native');
 const _create = require('./src/create');
 const _createHook = require('./src/create-hook');
@@ -11,7 +12,7 @@ const {tailwind, getColor} = _create(defaultStyles, []);
 let _useTailwind = null;
 const useTailwind = () => {
 	if (!_useTailwind) {
-		_useTailwind = _createHook(defaultStyles, defaultScreens, useWindowDimensions);
+		_useTailwind = _createHook(defaultStyles, defaultScreens, useWindowDimensions, useMemo);
 	}
 
 	return _useTailwind();
@@ -22,4 +23,4 @@ module.exports.default = tailwind;
 module.exports.getColor = getColor;
 module.exports.useTailwind = useTailwind;
 module.exports.create = tailwindStyles => _create(tailwindStyles, []);
-module.exports.createHook = (tailwindStyles, screensConfig, dimensionsHook = useWindowDimensions) => _createHook(tailwindStyles, screensConfig, dimensionsHook);
+module.exports.createHook = (tailwindStyles, screensConfig, dimensionsHook = useWindowDimensions, memoHook = useMemo) => _createHook(tailwindStyles, screensConfig, dimensionsHook, memoHook);

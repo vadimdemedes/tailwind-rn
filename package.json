@@ -49,6 +49,7 @@
 		"xo": "^0.30.0"
 	},
 	"peerDependencies": {
+		"react": "*",
 		"react-native": "*"
 	},
 	"ava": {

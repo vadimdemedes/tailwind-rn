@@ -1,9 +1,14 @@
-'use-strict';
+'use strict';
+
 const create = require('./create');
 
-const createHook = (tailwindStyles, screensConfig, useWindowDimensions) => {
+const createHook = (tailwindStyles, screensConfig, useWindowDimensions, useMemo) => {
+	if (!useMemo) {
+		throw new Error('Unsupported react version, useMemo hook not found');
+	}
+
 	if (!useWindowDimensions) {
-		throw new Error('Unsupported react native version, useWindowDimensions hook not found');
+		throw new Error('Unsupported react-native version, useWindowDimensions hook not found');
 	}
 
 	return () => {
@@ -18,8 +23,11 @@ const createHook = (tailwindStyles, screensConfig, useWindowDimensions) => {
 					actif: width >= breakpoint.min
 				};
 			});
+		const cachekey = breakpointsConfig.map(breakpoint => `${breakpoint.name}=${breakpoint.actif}`);
 
-		return create(tailwindStyles, breakpointsConfig);
+		return useMemo(() => {
+			return create(tailwindStyles, breakpointsConfig);
+		}, [tailwindStyles, cachekey]);
 	};
 };
 
