@@ -1,4 +1,7 @@
-const matchAll = require('match-all');
+'use strict';
+
+// Used to reference rules without breakpoint prefix
+const defaultBreakpointKey = '__default';
 
 // Tailwind started using CSS variables for color opacity since v1.4.0,
 // this helper adds a primitive support for these
@@ -22,11 +25,12 @@ const useVariables = object => {
 
 // Font variant numeric utilities need a special treatment, because
 // there can be many font variant classes and they need to be transformed to an array
-const FONT_VARIANT_REGEX = /(oldstyle-nums|lining-nums|tabular-nums|proportional-nums)/g;
+const addFontVariant = (style, separateClassNames, prefix) => {
+	const regex = new RegExp(`^${prefix}(oldstyle-nums|lining-nums|tabular-nums|proportional-nums)$`);
 
-// Todo : add breakpoints support to font variant
-const addFontVariant = (style, classNames) => {
-	const matches = matchAll(classNames, FONT_VARIANT_REGEX).toArray();
+	const matches = separateClassNames
+		.filter(className => regex.test(className))
+		.map(className => className.replace(prefix, ''));
 
 	if (matches.length > 0) {
 		style.fontVariant = matches;
@@ -53,9 +57,12 @@ const create = (tailwindStyles, breakpointsConfig) => {
 	const screenNames = breakpointsConfig
 		.map(breakpoint => breakpoint.name);
 
-	const supportedScreens = breakpointsConfig
-		.filter(breakpoint => breakpoint.actif)
-		.map(breakpoint => breakpoint.name);
+	const supportedScreens = [
+		defaultBreakpointKey,
+		...breakpointsConfig
+			.filter(breakpoint => breakpoint.actif)
+			.map(breakpoint => breakpoint.name)
+	];
 
 	const breakpointPrefixRegex = new RegExp(`^(${screenNames.join('|')}):`);
 
@@ -69,15 +76,13 @@ const create = (tailwindStyles, breakpointsConfig) => {
 			return style;
 		}
 
-		addFontVariant(style, classNames);
-
 		const separateClassNames = classNames
 			.replace(/\s+/g, ' ')
 			.trim()
 			.split(' ');
 
 		const classNamesByScreens = separateClassNames.reduce((acc, className) => {
-			const screen = screenNames.find(_screen => className.startsWith(`${_screen}:`)) || '__default';
+			const screen = screenNames.find(_screen => className.startsWith(`${_screen}:`)) || defaultBreakpointKey;
 
 			if (!acc[screen]) {
 				acc[screen] = [];
@@ -90,10 +95,16 @@ const create = (tailwindStyles, breakpointsConfig) => {
 
 		let letterSpacingClassName = null;
 
-		for (const screen of ['__default', ...supportedScreens]) {
+		for (const screen of supportedScreens) {
 			if (!classNamesByScreens[screen]) {
 				continue;
 			}
+
+			// Adding font variant for each supported screen
+			// since the supported screens are sorted,
+			// font variant rules of bigger screens will always override those of smaller ones
+			const breakpointPrefix = defaultBreakpointKey === screen ? '' : `${screen}:`;
+			addFontVariant(style, separateClassNames, breakpointPrefix);
 
 			for (const screenCalssName of classNamesByScreens[screen]) {
 				const className = screenCalssName.replace(breakpointPrefixRegex, '');
@@ -107,6 +118,7 @@ const create = (tailwindStyles, breakpointsConfig) => {
 			}
 		}
 
+		// Add Letter spacing at last to be sure that we dont miss fontSize rule
 		if (letterSpacingClassName) {
 			addLetterSpacing(style, tailwindStyles[letterSpacingClassName].letterSpacing);
 		}

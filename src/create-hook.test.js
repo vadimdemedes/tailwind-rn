@@ -157,3 +157,36 @@ test('get styles for multiple breakpoint class', t => {
 		lineHeight: 24
 	});
 });
+
+test('support font-variant-numeric', t => {
+	// Default
+	let tailwind = getMockedTailwind({width: 639});
+	t.deepEqual(tailwind('md:proportional-nums oldstyle-nums sm:lining-nums md:tabular-nums xl:oldstyle-nums'), {
+		fontVariant: ['oldstyle-nums']
+	});
+
+	// Sm
+	tailwind = getMockedTailwind({width: 767});
+	t.deepEqual(tailwind('md:proportional-nums oldstyle-nums sm:lining-nums md:tabular-nums xl:oldstyle-nums'), {
+		fontVariant: ['lining-nums']
+	});
+
+	// Md
+	tailwind = getMockedTailwind({width: 1023});
+	t.deepEqual(tailwind('md:proportional-nums oldstyle-nums sm:lining-nums md:tabular-nums xl:oldstyle-nums'), {
+		fontVariant: ['proportional-nums', 'tabular-nums']
+	});
+
+	// Lg
+	tailwind = getMockedTailwind({width: 1279});
+	t.deepEqual(tailwind('md:proportional-nums oldstyle-nums sm:lining-nums md:tabular-nums xl:oldstyle-nums'), {
+		fontVariant: ['proportional-nums', 'tabular-nums']
+	});
+
+	// Xl
+	tailwind = getMockedTailwind({width: 1535});
+	t.deepEqual(tailwind('md:proportional-nums oldstyle-nums sm:lining-nums md:tabular-nums xl:oldstyle-nums'), {
+		fontVariant: ['oldstyle-nums']
+	});
+});
+
