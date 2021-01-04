@@ -150,14 +150,6 @@ const isUtilitySupported = (utility, rule) => {
 	return true;
 };
 
-const defaultScreens = {
-	sm: {min: 640},
-	md: {min: 768},
-	lg: {min: 1024},
-	xl: {min: 1280},
-	'2xl': {min: 1536}
-};
-
 const getBreakpointConfig = breakpoint => {
 	if (typeof breakpoint !== 'string' || !/^\d+px$/.test(breakpoint)) {
 		throw new Error('Unsupported breakpoint format (Example "sm": "640px").');
@@ -168,7 +160,7 @@ const getBreakpointConfig = breakpoint => {
 	return {min: minwidth};
 };
 
-module.exports = (source, config) => {
+module.exports = (source, breakpoints) => {
 	const {stylesheet} = css.parse(source);
 
 	// Mapping of Tailwind class names to React Native styles
@@ -193,15 +185,10 @@ module.exports = (source, config) => {
 
 	// Extract breakpoints from tailwind config
 	const screens = {};
-	const breakpoints = config && config.theme && config.theme.screens;
 	const screenKeys = Object.keys(breakpoints || {});
 
 	for (const screen of screenKeys) {
 		screens[screen] = getBreakpointConfig(breakpoints[screen]);
-	}
-
-	if (screenKeys.length === 0) {
-		Object.assign(screens, defaultScreens);
 	}
 
 	return {screens, styles};

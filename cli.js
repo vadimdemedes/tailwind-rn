@@ -11,10 +11,19 @@ meow(`
 	  $ create-tailwind-rn
 `);
 
-// Todo: replace the hard coded config path
+// Todo: Check if possible to get the config directly from tailwind
 const configPath = `${process.cwd()}/tailwind.config.js`;
 
-const config = fs.existsSync(configPath) ? JSON.parse(fs.readFileSync(configPath)) : null;
+const config = fs.existsSync(configPath) ? require(configPath) : null;
+
+const breakpoints = config && config.theme && config.theme.screens;
+const defaultBreakpoints = {
+	sm: '640px',
+	md: '768px',
+	lg: '1024px',
+	xl: '1280px',
+	'2xl': '1536px'
+};
 
 const source = `
 @tailwind components;
@@ -24,7 +33,7 @@ const source = `
 postcss([tailwind])
 	.process(source, {from: undefined})
 	.then(({css}) => {
-		const {screens, styles} = build(css, config);
+		const {screens, styles} = build(css, breakpoints || defaultBreakpoints);
 		fs.writeFileSync('styles.json', JSON.stringify(styles, null, '\t'));
 		fs.writeFileSync('screens.json', JSON.stringify(screens, null, '\t'));
 	})
