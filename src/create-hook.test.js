@@ -4,9 +4,11 @@ import defaultStyles from '../styles.json';
 import defaultScreens from '../screens.json';
 
 const getMockedTailwind = ({width}) => {
-	const useMemoMock = fn => fn();
-	const useDimensionMock = () => ({width});
-	const useTailwind = createHook(defaultStyles, defaultScreens, useDimensionMock, useMemoMock);
+	const ReactMock = {useMemo: fn => fn()};
+	const ReactNativeMock = {useWindowDimensions: () => ({width})};
+	const mockedCreateHook = createHook(ReactMock, ReactNativeMock);
+
+	const useTailwind = mockedCreateHook(defaultStyles, defaultScreens);
 	const {tailwind} = useTailwind();
 
 	return tailwind;
