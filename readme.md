@@ -138,6 +138,12 @@ Add this file to your version control system, because it's going to be needed wh
 $ npx create-tailwind-rn
 ```
 
+You can specify a path to your tailwind configuration with the `-i` flag, as well as the filename for your generated json file with the `-o` flag.
+
+```
+$ npx create-tailwind-rn -i path/to/tailwind.config.js -o styles.json
+```
+
 #### 3. Create a custom `tailwind()` function
 
 Use `create()` function to generate the same `tailwind()` and `getColor()` functions, but with your custom styles applied.
