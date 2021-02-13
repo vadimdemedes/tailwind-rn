@@ -1,10 +1,15 @@
 #!/usr/bin/env node
 'use strict';
 const fs = require('fs');
+const path = require('path');
 const meow = require('meow');
 const postcss = require('postcss');
 const tailwind = require('tailwindcss');
 const build = require('./build');
+const yargs = require('yargs/yargs');
+const {hideBin} = require('yargs/helpers');
+
+const {argv} = yargs(hideBin(process.argv));
 
 meow(`
 	Usage
@@ -16,11 +21,18 @@ const source = `
 @tailwind utilities;
 `;
 
-postcss([tailwind])
+function checkArg(arg) {
+	return arg && arg === path.basename(arg);
+}
+
+postcss([checkArg(argv.i) ? tailwind(argv.i) : tailwind])
 	.process(source, {from: undefined})
 	.then(({css}) => {
 		const styles = build(css);
-		fs.writeFileSync('styles.json', JSON.stringify(styles, null, '\t'));
+		fs.writeFileSync(
+			checkArg(argv.o) ? argv.o : 'styles.json',
+			JSON.stringify(styles, null, '\t')
+		);
 	})
 	.catch(error => {
 		console.error('> Error occurred while generating styles');

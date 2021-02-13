@@ -37,7 +37,8 @@
 		"css-to-react-native": "^3.0.0",
 		"match-all": "^1.2.6",
 		"meow": "^7.0.1",
-		"postcss": "^8.1.14"
+		"postcss": "^8.1.14",
+		"yargs": "^16.2.0"
 	},
 	"devDependencies": {
 		"@ava/babel": "^1.0.1",
