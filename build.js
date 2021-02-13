@@ -150,7 +150,17 @@ const isUtilitySupported = (utility, rule) => {
 	return true;
 };
 
-module.exports = source => {
+const getBreakpointConfig = breakpoint => {
+	if (typeof breakpoint !== 'string' || !/^\d+px$/.test(breakpoint)) {
+		throw new Error('Unsupported breakpoint format (Example "sm": "640px").');
+	}
+
+	const minwidth = Number(breakpoint.replace('px', ''));
+
+	return {min: minwidth};
+};
+
+module.exports = (source, breakpoints) => {
 	const {stylesheet} = css.parse(source);
 
 	// Mapping of Tailwind class names to React Native styles
@@ -173,5 +183,13 @@ module.exports = source => {
 	styles['line-through'] = {textDecorationLine: 'line-through'};
 	styles['no-underline'] = {textDecorationLine: 'none'};
 
-	return styles;
+	// Extract breakpoints from tailwind config
+	const screens = {};
+	const screenKeys = Object.keys(breakpoints || {});
+
+	for (const screen of screenKeys) {
+		screens[screen] = getBreakpointConfig(breakpoints[screen]);
+	}
+
+	return {screens, styles};
 };
