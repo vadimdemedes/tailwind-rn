@@ -107,6 +107,18 @@ test('support font-variant-numeric', t => {
 	);
 });
 
+test('support line height', t => {
+	t.deepEqual(tailwind('text-base leading-loose'), {
+		fontSize: 16,
+		lineHeight: 32
+	});
+
+	t.deepEqual(tailwind('text-base leading-5'), {
+		fontSize: 16,
+		lineHeight: 20
+	});
+});
+
 test('support letter spacing', t => {
 	t.deepEqual(tailwind('text-base tracking-tighter'), {
 		fontSize: 16,

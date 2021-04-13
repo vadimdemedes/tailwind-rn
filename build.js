@@ -6,14 +6,6 @@ const remToPx = value => `${Number.parseFloat(value) * 16}px`;
 
 const getStyles = rule => {
 	const styles = rule.declarations
-		.filter(({property, value}) => {
-			// Skip line-height utilities without units
-			if (property === 'line-height' && !value.endsWith('rem')) {
-				return false;
-			}
-
-			return true;
-		})
 		.map(({property, value}) => {
 			if (value.endsWith('rem')) {
 				return [property, remToPx(value)];
@@ -130,10 +122,6 @@ const isUtilitySupported = (utility, rule) => {
 		}
 
 		if (property === 'position' && !['absolute', 'relative'].includes(value)) {
-			return false;
-		}
-
-		if (property === 'line-height' && !value.endsWith('rem')) {
 			return false;
 		}
 

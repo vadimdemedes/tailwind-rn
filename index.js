@@ -37,6 +37,33 @@ const addFontVariant = (style, classNames) => {
 // in em unit, that's why it requires a font size to be set too
 const FONT_SIZE_REGEX = /text-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl|6xl)/;
 const LETTER_SPACING_REGEX = /(tracking-[a-z]+)/;
+const LINE_HEIGHT_REGEX = /(leading-(.+))/;
+
+const addLineHeight = (tailwindStyles, style, classNames) => {
+	const lineHeightMatches = LINE_HEIGHT_REGEX.exec(classNames);
+
+	if (!lineHeightMatches) {
+		return;
+	}
+
+	const lineHeightClass = lineHeightMatches[0];
+	const lineHeightModifier = Number(lineHeightClass.split('-')[1]);
+	const {lineHeight} = tailwindStyles[lineHeightClass];
+
+	if (!Number.isNaN(lineHeightModifier)) {
+		style.lineHeight = lineHeight;
+
+		return;
+	}
+
+	if (!style.fontSize) {
+		throw new Error(
+			"Font size is required when applying letter spacing, e.g. 'text-lg leading-loose'" // eslint-disable-line quotes
+		);
+	}
+
+	style.lineHeight = Number.parseFloat(lineHeight) * style.fontSize;
+};
 
 const addLetterSpacing = (tailwindStyles, style, classNames) => {
 	const letterSpacingMatches = LETTER_SPACING_REGEX.exec(classNames);
@@ -79,7 +106,8 @@ const create = tailwindStyles => {
 			.replace(/\s+/g, ' ')
 			.trim()
 			.split(' ')
-			.filter(className => !className.startsWith('tracking-'));
+			.filter(className => !className.startsWith('tracking-'))
+			.filter(className => !className.startsWith('leading-'));
 
 		for (const className of separateClassNames) {
 			if (tailwindStyles[className]) {
@@ -88,6 +116,8 @@ const create = tailwindStyles => {
 				console.warn(`Unsupported Tailwind class: "${className}"`);
 			}
 		}
+
+		addLineHeight(tailwindStyles, style, classNames);
 
 		return useVariables(style);
 	};
