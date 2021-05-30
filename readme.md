@@ -140,6 +140,7 @@ Add this file to your version control system, because it's going to be needed wh
 ```
 $ npx create-tailwind-rn
 ```
+run `npx create-tailwind-rn --help` for options
 
 #### 3. Create a custom `tailwind()` function
 

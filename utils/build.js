@@ -2,9 +2,9 @@
 const css = require('css');
 const cssToReactNative = require('css-to-react-native').default;
 
-const remToPx = value => `${Number.parseFloat(value) * 16}px`;
+const remToPx = (value, remSize) => `${Number.parseFloat(value) * remSize}px`;
 
-const getStyles = rule => {
+const getStyles = (rule, remSize = 16) => {
 	const styles = rule.declarations
 		.filter(({property, value}) => {
 			// Skip line-height utilities without units
@@ -16,7 +16,7 @@ const getStyles = rule => {
 		})
 		.map(({property, value}) => {
 			if (value.endsWith('rem')) {
-				return [property, remToPx(value)];
+				return [property, remToPx(value, remSize)];
 			}
 
 			return [property, value];
@@ -150,7 +150,7 @@ const isUtilitySupported = (utility, rule) => {
 	return true;
 };
 
-module.exports = source => {
+module.exports = (source, remSize = 16) => {
 	const {stylesheet} = css.parse(source);
 
 	// Mapping of Tailwind class names to React Native styles
@@ -162,7 +162,7 @@ module.exports = source => {
 				const utility = selector.replace(/^\./, '').replace('\\', '');
 
 				if (isUtilitySupported(utility, rule)) {
-					styles[utility] = getStyles(rule);
+					styles[utility] = getStyles(rule, remSize);
 				}
 			}
 		}
