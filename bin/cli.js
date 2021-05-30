@@ -1,15 +1,11 @@
 #!/usr/bin/env node
 'use strict';
 const fs = require('fs');
-const meow = require('meow');
 const postcss = require('postcss');
 const tailwind = require('tailwindcss');
-const build = require('./build');
+const build = require('../utils/build');
 
-meow(`
-	Usage
-	  $ create-tailwind-rn
-`);
+const flags = require('../utils/cli-parse')
 
 const source = `
 @tailwind components;
@@ -19,8 +15,8 @@ const source = `
 postcss([tailwind])
 	.process(source, {from: undefined})
 	.then(({css}) => {
-		const styles = build(css);
-		fs.writeFileSync('styles.json', JSON.stringify(styles, null, '\t'));
+		const styles = build(css, flags.rem);
+    fs.writeFileSync(flags.outFile, JSON.stringify(styles, null, '\t'));
 	})
 	.catch(error => {
 		console.error('> Error occurred while generating styles');

@@ -10,19 +10,20 @@
 		"url": "https://vadimdemedes.com"
 	},
 	"bin": {
-		"create-tailwind-rn": "cli.js"
+		"create-tailwind-rn": "bin/cli.js"
 	},
 	"engines": {
 		"node": ">=10"
 	},
 	"scripts": {
-		"build": "node cli",
+		"build": "node bin/cli",
 		"prepare": "npm run build",
 		"test": "xo && tsd && ava"
 	},
 	"files": [
-		"build.js",
-		"cli.js",
+	  "utils/build.js",
+	  "utils/cli-parse.js",
+	  "bin/cli.js",
 		"index.js",
 		"index.d.ts",
 		"styles.json"
