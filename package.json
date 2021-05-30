@@ -16,7 +16,7 @@
 		"node": ">=10"
 	},
 	"scripts": {
-		"build": "node cli",
+		"build": "node bin/cli",
 		"prepare": "npm run build",
 		"test": "xo && tsd && ava"
 	},
