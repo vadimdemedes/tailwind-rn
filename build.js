@@ -92,8 +92,8 @@ const unsupportedProperties = new Set([
 ]);
 
 const isUtilitySupported = (utility, rule) => {
-	// Skip utilities with pseudo-selectors
-	if (utility.includes(':')) {
+	// Skip utilities with hover and focus pseudo-selectors
+	if (utility.match(/\:(hover|focus)/)) {
 		return false;
 	}
 
