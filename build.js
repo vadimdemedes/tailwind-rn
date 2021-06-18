@@ -137,8 +137,11 @@ const isUtilitySupported = (utility, rule) => {
 			return false;
 		}
 
+		if (!(property === 'margin' || property === 'padding') && value === 'auto') {
+			return false;
+		}
+
 		if (
-			value === 'auto' ||
 			value.endsWith('vw') ||
 			value.endsWith('vh') ||
 			value === 'currentColor'
