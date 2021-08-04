@@ -107,6 +107,60 @@ test('support font-variant-numeric', t => {
 	);
 });
 
+test('Support elevation test', t => {
+	t.deepEqual(tailwind('elevation-none'), {
+		elevation: 0
+	});
+
+	t.deepEqual(tailwind('elevation-20'), {
+		elevation: 2
+	});
+
+	t.deepEqual(tailwind('elevation-40'), {
+		elevation: 4
+	});
+
+	t.deepEqual(tailwind('elevation-60'), {
+		elevation: 6
+	});
+
+	t.deepEqual(tailwind('elevation-80'), {
+		elevation: 8
+	});
+
+	t.deepEqual(tailwind('elevation-100'), {
+		elevation: 10
+	});
+
+	t.deepEqual(tailwind('elevation-sm'), {
+		elevation: 12
+	});
+
+	t.deepEqual(tailwind('elevation-md'), {
+		elevation: 14
+	});
+
+	t.deepEqual(tailwind('elevation-lg'), {
+		elevation: 16
+	});
+
+	t.deepEqual(tailwind('elevation-xl'), {
+		elevation: 18
+	});
+
+	t.deepEqual(tailwind('elevation-2xl'), {
+		elevation: 20
+	});
+
+	t.deepEqual(tailwind('elevation-3xl'), {
+		elevation: 22
+	});
+
+	t.deepEqual(tailwind('elevation-4xl'), {
+		elevation: 24
+	});
+});
+
 test('support letter spacing', t => {
 	t.deepEqual(tailwind('text-base tracking-tighter'), {
 		fontSize: 16,

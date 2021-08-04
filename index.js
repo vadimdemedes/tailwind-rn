@@ -33,6 +33,26 @@ const addFontVariant = (style, classNames) => {
 	}
 };
 
+/*
+	1. Tailwind doesn't have support to elevation class.
+	2. The elevation style are a merge of shadow and z-index properties.
+	3. As the create method use mutable statements, this function will has
+	the only responsibility to add the elevation class, if the regex match.
+*/
+
+const ELEVATION_REGEX = /elevation-(20|40|60|80|100|sm|md|lg|xl|2xl|3xl|4xl|none)/;
+
+const addElevation = (outboxAndTailwindStyles, style, classNames) => {
+	const elevationRegexMatches = ELEVATION_REGEX.exec(classNames);
+
+	if (elevationRegexMatches) {
+		const definedClass = elevationRegexMatches.shift();
+		const matchedElevation = outboxAndTailwindStyles[definedClass].elevation;
+
+		style.elevation = matchedElevation;
+	}
+};
+
 // Letter spacing also needs a special treatment, because its value is set
 // in em unit, that's why it requires a font size to be set too
 const FONT_SIZE_REGEX = /text-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl|6xl)/;
@@ -62,6 +82,8 @@ const addLetterSpacing = (tailwindStyles, style, classNames) => {
 };
 
 const create = tailwindStyles => {
+	const outboxAndTailwindStyles = {...tailwindStyles, ...require('./outbox.json')};
+
 	// Pass a list of class names separated by a space, for example:
 	// "bg-green-100 text-green-800 font-semibold")
 	// and receive a styles object for use in React Native views
@@ -73,7 +95,8 @@ const create = tailwindStyles => {
 		}
 
 		addFontVariant(style, classNames);
-		addLetterSpacing(tailwindStyles, style, classNames);
+		addLetterSpacing(outboxAndTailwindStyles, style, classNames);
+		addElevation(outboxAndTailwindStyles, style, classNames);
 
 		const separateClassNames = classNames
 			.replace(/\s+/g, ' ')
@@ -82,8 +105,8 @@ const create = tailwindStyles => {
 			.filter(className => !className.startsWith('tracking-'));
 
 		for (const className of separateClassNames) {
-			if (tailwindStyles[className]) {
-				Object.assign(style, tailwindStyles[className]);
+			if (outboxAndTailwindStyles[className]) {
+				Object.assign(style, outboxAndTailwindStyles[className]);
 			} else {
 				console.warn(`Unsupported Tailwind class: "${className}"`);
 			}

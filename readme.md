@@ -113,6 +113,7 @@ tailwind('pt-12 items-center');
 
 ### Effects
 
+- [Elevation](#out-the-box)
 - [Opacity](https://tailwindcss.com/docs/opacity)
 
 ### Interactivity
@@ -187,6 +188,32 @@ import {tailwind} from 'tailwind';
 Type: `string[]`
 
 Array of Tailwind CSS classes you want to generate styles for.
+
+
+### Out the box
+
+Some class were also added to support some native styling. 
+
+##### Elevation
+
+| Class       			| Properties |
+| ----------------- | ---------- |
+| "elevation-none"  | 0     		 |
+| elevation-20   	  | 2      		 |
+| elevation-40   		| 4     		 |
+| elevation-60   		| 6     		 |
+| elevation-80      | 8     		 |
+| elevation-100   	| 10    		 |
+| elevation-sm   		| 12    		 |
+| elevation-md   		| 14    		 |
+| elevation-lg   		| 16    		 |
+| elevation-xl   		| 18    		 |
+| elevation-2xl   	| 20    		 |
+| elevation-3xl   	| 22    		 |
+| elevation-4xl   	| 24    		 |
+
+
+
 
 ### getColor(color)
 
