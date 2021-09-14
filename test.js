@@ -45,11 +45,11 @@ test('ignore non-string values when transforming CSS variables', t => {
 });
 
 test('get color value', t => {
-	t.is(getColor('blue-500'), 'rgba(59, 130, 246, 1)');
+	t.is(getColor('bg-blue-500'), 'rgba(59, 130, 246, 1)');
 });
 
 test('get color with opacity value', t => {
-	t.is(getColor('blue-500 opacity-50'), 'rgba(59, 130, 246, 0.5)');
+	t.is(getColor('bg-blue-500 bg-opacity-50'), 'rgba(59, 130, 246, 0.5)');
 });
 
 test('ignore no value param', t => {
