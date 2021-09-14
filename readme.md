@@ -195,7 +195,7 @@ Get color value from Tailwind CSS color name.
 ```js
 import {getColor} from 'tailwind-rn';
 
-getColor('blue-500');
+getColor('bg-blue-500');
 //=> '#ebf8ff'
 ```
 
@@ -204,7 +204,7 @@ To get a color with opacity:
 ```js
 import {getColor} from 'tailwind-rn';
 
-getColor('blue-500 opacity-50');
+getColor('bg-blue-500 bg-opacity-50');
 //=> 'rgba(66, 153, 225, 0.5)'
 ```
 
