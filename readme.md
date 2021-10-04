@@ -177,6 +177,21 @@ import {tailwind} from '../../../tailwind';
 // After
 import {tailwind} from 'tailwind';
 ```
+## TailwindCSS intellisense
+
+### VSCode 
+
+To have full TailwindCSS support including support for a custom TailwindCSS config. Install the [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss).
+
+Once installed you need to add the following line to your settings.json file:
+
+```json
+  /* TailwindCSS */
+  "tailwindCSS.experimental.classRegex": ["tailwind\\('([^)]*)\\')", "'([^']*)'"]
+```
+
+To ensure this to work, make sure you have atleast `v0.5.1` installed of the Tailwind CSS IntelliSense addon. [ref](https://github.com/tailwindlabs/tailwindcss-intellisense/issues/129#issuecomment-735915659)
+
 
 ## API
 
