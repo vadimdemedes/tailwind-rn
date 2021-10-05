@@ -25,6 +25,7 @@
 		"cli.js",
 		"index.js",
 		"index.d.ts",
+		"screens.json",
 		"styles.json",
 		"src/create.js",
 		"src/create-hook.js"
