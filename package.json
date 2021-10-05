@@ -26,6 +26,8 @@
 		"index.js",
 		"index.d.ts",
 		"styles.json"
+		"src/create.js"
+		"src/create-hook.js"
 	],
 	"keywords": [
 		"tailwind",
@@ -46,6 +48,10 @@
 		"tailwindcss": "^2.0.2",
 		"tsd": "^0.11.0",
 		"xo": "^0.30.0"
+	},
+	"peerDependencies": {
+		"react": "*",
+		"react-native": "*"
 	},
 	"ava": {
 		"babel": true
