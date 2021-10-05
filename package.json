@@ -25,8 +25,8 @@
 		"cli.js",
 		"index.js",
 		"index.d.ts",
-		"styles.json"
-		"src/create.js"
+		"styles.json",
+		"src/create.js",
 		"src/create-hook.js"
 	],
 	"keywords": [
