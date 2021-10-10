@@ -18,9 +18,11 @@ const source = `
 
 postcss([tailwind])
 	.process(source, {from: undefined})
-	.then(({css}) => {
+	.then(async ({css}) => {
 		const styles = build(css);
-		fs.writeFileSync('styles.json', JSON.stringify(styles, null, '\t'));
+		// Clear old config and make sure for new config.
+		await fs.writeFileSync('styles.json', '');
+		await fs.writeFileSync('styles.json', JSON.stringify(styles, null, '\t'));
 	})
 	.catch(error => {
 		console.error('> Error occurred while generating styles');
