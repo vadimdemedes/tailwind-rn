@@ -13,7 +13,7 @@
 		"create-tailwind-rn": "cli.js"
 	},
 	"engines": {
-		"node": ">=10"
+		"node": ">=12"
 	},
 	"scripts": {
 		"test": "xo && tsd && ava"
