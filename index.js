@@ -1,25 +1,7 @@
 'use strict';
 const matchAll = require('match-all');
-
-// Tailwind started using CSS variables for color opacity since v1.4.0,
-// this helper adds a primitive support for these
-const useVariables = object => {
-	const newObject = {};
-
-	for (const [key, value] of Object.entries(object)) {
-		if (!key.startsWith('--')) {
-			if (typeof value === 'string') {
-				newObject[key] = value.replace(/var\(([a-zA-Z-]+)\)/, (_, name) => {
-					return object[name];
-				});
-			} else {
-				newObject[key] = value;
-			}
-		}
-	}
-
-	return newObject;
-};
+const evaluateStyle = require('./lib/evaluate-style');
+const emToPx = require('./lib/em-to-px');
 
 // Font variant numeric utilities need a special treatment, because
 // there can be many font variant classes and they need to be transformed to an array
@@ -58,7 +40,7 @@ const addLetterSpacing = (tailwindStyles, style, classNames) => {
 	const fontSizeClass = fontSizeMatches[0];
 	const {fontSize} = tailwindStyles[fontSizeClass];
 
-	style.letterSpacing = Number.parseFloat(letterSpacing) * fontSize;
+	style.letterSpacing = emToPx(letterSpacing, fontSize);
 };
 
 const create = tailwindStyles => {
@@ -89,7 +71,7 @@ const create = tailwindStyles => {
 			}
 		}
 
-		return useVariables(style);
+		return evaluateStyle(style);
 	};
 
 	// Pass the class of a color (e.g. "bg-blue-500") and receive a color value (e.g. "#4399e1"),
