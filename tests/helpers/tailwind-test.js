@@ -1,3 +1,4 @@
+/* eslint-disable ava/no-ignored-test-files */
 const test = require('ava');
 const compile = require('./compile');
 
