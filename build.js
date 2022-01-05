@@ -162,7 +162,7 @@ module.exports = source => {
 	for (const rule of stylesheet.rules) {
 		if (rule.type === 'rule') {
 			for (const selector of rule.selectors) {
-				const utility = selector.replace(/^\./, '').replace('\\', '');
+				const utility = selector.replace(/^\./, '').replace(/\\/g, '');
 
 				if (isUtilitySupported(utility, rule)) {
 					styles[utility] = getStyles(rule);
