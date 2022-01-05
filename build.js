@@ -137,7 +137,7 @@ const isUtilitySupported = (utility, rule) => {
 		}
 
 		if (
-			value === 'auto' ||
+			(value === 'auto' && property !== 'align-self') ||
 			value.endsWith('vw') ||
 			value.endsWith('vh') ||
 			value === 'currentColor'
