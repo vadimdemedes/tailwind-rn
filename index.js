@@ -1,17 +1,28 @@
 'use strict';
-const matchAll = require('match-all');
 const evaluateStyle = require('./lib/evaluate-style');
 const emToPx = require('./lib/em-to-px');
 
 // Font variant numeric utilities need a special treatment, because
 // there can be many font variant classes and they need to be transformed to an array
-const FONT_VARIANT_REGEX = /(oldstyle-nums|lining-nums|tabular-nums|proportional-nums)/g;
+const FONT_VARIANT_REGEX = /(oldstyle-nums|lining-nums|tabular-nums|proportional-nums)/;
+const FONT_VARIANTS = [
+	'oldstyle-nums',
+	'lining-nums',
+	'tabular-nums',
+	'proportional-nums'
+];
 
 const addFontVariant = (style, classNames) => {
-	const matches = matchAll(classNames, FONT_VARIANT_REGEX).toArray();
+	if (!FONT_VARIANT_REGEX.test(classNames)) {
+		return;
+	}
 
-	if (matches.length > 0) {
-		style.fontVariant = matches;
+	style.fontVariant = [];
+
+	for (const fontVariant of FONT_VARIANTS) {
+		if (classNames.includes(fontVariant)) {
+			style.fontVariant.push(fontVariant);
+		}
 	}
 };
 
@@ -61,7 +72,12 @@ const create = tailwindStyles => {
 			.replace(/\s+/g, ' ')
 			.trim()
 			.split(' ')
-			.filter(className => !className.startsWith('tracking-'));
+			.filter(className => {
+				return (
+					!className.startsWith('tracking-') &&
+					!FONT_VARIANT_REGEX.test(className)
+				);
+			});
 
 		for (const className of separateClassNames) {
 			if (tailwindStyles[className]) {
