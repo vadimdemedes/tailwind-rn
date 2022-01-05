@@ -59,6 +59,7 @@ const unsupportedProperties = new Set([
 	'place-items',
 	'place-self',
 	'font-family',
+	'font-variant-numeric',
 	'list-style-type',
 	'list-style-position',
 	'text-decoration',
