@@ -61,7 +61,6 @@ const unsupportedProperties = new Set([
 	'font-variant-numeric',
 	'list-style-type',
 	'list-style-position',
-	'text-decoration',
 	'vertical-align',
 	'white-space',
 	'word-break',
@@ -145,6 +144,10 @@ const isUtilitySupported = (utility, rule) => {
 		) {
 			return false;
 		}
+
+		if (property === 'text-decoration-line' && value === 'overline') {
+			return false;
+		}
 	}
 
 	return true;
@@ -167,11 +170,6 @@ module.exports = source => {
 			}
 		}
 	}
-
-	// Additional styles that we're not able to parse correctly automatically
-	styles.underline = {textDecorationLine: 'underline'};
-	styles['line-through'] = {textDecorationLine: 'line-through'};
-	styles['no-underline'] = {textDecorationLine: 'none'};
 
 	return styles;
 };
