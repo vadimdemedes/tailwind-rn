@@ -1,8 +1,7 @@
 'use strict';
 const css = require('css');
 const cssToReactNative = require('css-to-react-native').default;
-
-const remToPx = value => `${Number.parseFloat(value) * 16}px`;
+const remToPx = require('./lib/rem-to-px');
 
 const getStyles = rule => {
 	const styles = rule.declarations
