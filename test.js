@@ -1,9 +1,9 @@
-import * as fs from 'fs';
-import test from 'ava';
-import execa from 'execa';
-import tempfile from 'tempfile';
-import {create} from '.';
-import build from './build';
+const fs = require('fs');
+const test = require('ava');
+const execa = require('execa');
+const tempfile = require('tempfile');
+const {create} = require('.');
+const build = require('./build');
 
 const compile = async classNames => {
 	const input = tempfile();
