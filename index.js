@@ -100,9 +100,5 @@ const create = tailwindStyles => {
 	return {tailwind, getColor};
 };
 
-const {tailwind, getColor} = create(require('./styles.json'));
-
-module.exports = tailwind;
-module.exports.default = tailwind;
-module.exports.getColor = getColor;
-module.exports.create = create;
+module.exports = create;
+module.exports.default = create;

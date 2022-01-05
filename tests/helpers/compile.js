@@ -2,7 +2,7 @@ const fs = require('fs');
 const execa = require('execa');
 const tempfile = require('tempfile');
 const build = require('../../build');
-const {create} = require('../..');
+const create = require('../..');
 
 const compile = async classNames => {
 	const input = tempfile();

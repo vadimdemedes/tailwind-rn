@@ -16,8 +16,6 @@
 		"node": ">=10"
 	},
 	"scripts": {
-		"build": "node cli",
-		"prepare": "npm run build",
 		"test": "xo && tsd && ava"
 	},
 	"files": [
@@ -25,8 +23,7 @@
 		"build.js",
 		"cli.js",
 		"index.js",
-		"index.d.ts",
-		"styles.json"
+		"index.d.ts"
 	],
 	"keywords": [
 		"tailwind",
