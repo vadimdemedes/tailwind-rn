@@ -49,6 +49,11 @@ tailwindTest('m-[-3px]', {
 	marginLeft: -3
 });
 
+tailwindTest('mx-auto', {
+	marginRight: 'auto',
+	marginLeft: 'auto'
+});
+
 tailwindTest('mx-0', {
 	marginRight: 0,
 	marginLeft: 0
@@ -89,6 +94,11 @@ tailwindTest('my-0', {
 	marginBottom: 0
 });
 
+tailwindTest('my-auto', {
+	marginTop: 'auto',
+	marginBottom: 'auto'
+});
+
 tailwindTest('my-px', {
 	marginTop: 1,
 	marginBottom: 1
@@ -125,6 +135,10 @@ for (const [side, prop] of Object.entries({
 	b: 'marginBottom',
 	l: 'marginLeft'
 })) {
+	tailwindTest(`m${side}-auto`, {
+		[prop]: 'auto'
+	});
+
 	tailwindTest(`m${side}-0`, {
 		[prop]: 0
 	});

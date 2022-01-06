@@ -89,6 +89,15 @@ const unsupportedProperties = new Set([
 	'stroke-width'
 ]);
 
+const supportedPropertiesWithAuto = new Set([
+	'align-self',
+	'pointer-events',
+	'margin-top',
+	'margin-right',
+	'margin-bottom',
+	'margin-left'
+]);
+
 const isUtilitySupported = (utility, rule) => {
 	// Skip utilities with pseudo-selectors
 	if (utility.includes(':')) {
@@ -136,9 +145,7 @@ const isUtilitySupported = (utility, rule) => {
 		}
 
 		if (
-			(value === 'auto' &&
-				property !== 'align-self' &&
-				property !== 'pointer-events') ||
+			(value === 'auto' && !supportedPropertiesWithAuto.has(property)) ||
 			value.endsWith('vw') ||
 			value.endsWith('vh') ||
 			value === 'currentColor'
