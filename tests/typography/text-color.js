@@ -23,3 +23,7 @@ tailwindTest('text-blue-500', {
 tailwindTest('text-blue-500/50', {
 	color: 'rgb(59 130 246 / 0.5)'
 });
+
+tailwindTest('text-blue-500/[.67]', {
+	color: 'rgb(59 130 246 / .67)'
+});
