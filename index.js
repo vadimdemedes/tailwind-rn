@@ -4,7 +4,8 @@ const emToPx = require('./lib/em-to-px');
 
 // Font variant numeric utilities need a special treatment, because
 // there can be many font variant classes and they need to be transformed to an array
-const FONT_VARIANT_REGEX = /(oldstyle-nums|lining-nums|tabular-nums|proportional-nums)/;
+const FONT_VARIANT_REGEX =
+	/(oldstyle-nums|lining-nums|tabular-nums|proportional-nums)/;
 const FONT_VARIANTS = [
 	'oldstyle-nums',
 	'lining-nums',
