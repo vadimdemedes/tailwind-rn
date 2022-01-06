@@ -137,7 +137,9 @@ const isUtilitySupported = (utility, rule) => {
 		}
 
 		if (
-			(value === 'auto' && property !== 'align-self') ||
+			(value === 'auto' &&
+				property !== 'align-self' &&
+				property !== 'pointer-events') ||
 			value.endsWith('vw') ||
 			value.endsWith('vh') ||
 			value === 'currentColor'
