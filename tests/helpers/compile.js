@@ -4,7 +4,7 @@ const tempfile = require('tempfile');
 const build = require('../../build');
 const create = require('../..');
 
-const compile = async classNames => {
+const compile = async (classNames, config) => {
 	const input = tempfile();
 	fs.writeFileSync(input, '@tailwind utilities;');
 
@@ -13,7 +13,7 @@ const compile = async classNames => {
 
 	const output = tempfile();
 
-	await execa('npx', [
+	const args = [
 		'tailwindcss',
 		'--input',
 		input,
@@ -22,7 +22,15 @@ const compile = async classNames => {
 		'--no-autoprefixer',
 		'--output',
 		output
-	]);
+	];
+
+	if (config) {
+		const path = tempfile();
+		fs.writeFileSync(path, `module.exports = ${JSON.stringify(config)}`);
+		args.push('--config', path);
+	}
+
+	await execa('npx', args);
 
 	const source = fs.readFileSync(output, 'utf8');
 	const styles = build(source);
