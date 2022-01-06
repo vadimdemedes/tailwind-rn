@@ -1,6 +1,7 @@
 'use strict';
 const evaluateStyle = require('./lib/evaluate-style');
 const emToPx = require('./lib/em-to-px');
+const matchesMediaQuery = require('./lib/matches-media-query');
 
 // Font variant numeric utilities need a special treatment, because
 // there can be many font variant classes and they need to be transformed to an array
@@ -48,14 +49,20 @@ const addLetterSpacing = (tailwindStyles, style, classNames) => {
 	}
 
 	const letterSpacingClass = letterSpacingMatches[0];
-	const {letterSpacing} = tailwindStyles[letterSpacingClass];
+	const {letterSpacing} = tailwindStyles[letterSpacingClass].style;
 	const fontSizeClass = fontSizeMatches[0];
-	const {fontSize} = tailwindStyles[fontSizeClass];
+	const {fontSize} = tailwindStyles[fontSizeClass].style;
 
 	style.letterSpacing = emToPx(letterSpacing, fontSize);
 };
 
-const create = tailwindStyles => {
+const defaultMedia = {
+	orientation: 'portrait',
+	colorScheme: 'light',
+	reduceMotion: false
+};
+
+const create = (tailwindStyles, media = defaultMedia) => {
 	// Pass a list of class names separated by a space, for example:
 	// "bg-green-100 text-green-800 font-semibold")
 	// and receive a styles object for use in React Native views
@@ -82,7 +89,15 @@ const create = tailwindStyles => {
 
 		for (const className of separateClassNames) {
 			if (tailwindStyles[className]) {
-				Object.assign(style, tailwindStyles[className]);
+				const tailwindStyle = tailwindStyles[className];
+
+				if (tailwindStyle.media) {
+					if (matchesMediaQuery(tailwindStyle.media, media)) {
+						Object.assign(style, tailwindStyle.style);
+					}
+				} else {
+					Object.assign(style, tailwindStyle.style);
+				}
 			} else {
 				console.warn(`Unsupported Tailwind class: "${className}"`);
 			}

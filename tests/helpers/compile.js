@@ -4,7 +4,7 @@ const tempfile = require('tempfile');
 const build = require('../../build');
 const create = require('../..');
 
-const compile = async (classNames, config) => {
+const compile = async (classNames, config, media) => {
 	const input = tempfile();
 	fs.writeFileSync(input, '@tailwind utilities;');
 
@@ -34,7 +34,7 @@ const compile = async (classNames, config) => {
 
 	const source = fs.readFileSync(output, 'utf8');
 	const styles = build(source);
-	return create(styles);
+	return create(styles, media);
 };
 
 module.exports = compile;

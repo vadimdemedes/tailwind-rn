@@ -99,11 +99,6 @@ const supportedPropertiesWithAuto = new Set([
 ]);
 
 const isUtilitySupported = (utility, rule) => {
-	// Skip utilities with pseudo-selectors
-	if (utility.includes(':')) {
-		return false;
-	}
-
 	// Skip unsupported utilities
 	if (
 		[
@@ -167,13 +162,28 @@ module.exports = source => {
 	// Mapping of Tailwind class names to React Native styles
 	const styles = {};
 
+	const addRule = (rule, media) => {
+		for (const selector of rule.selectors) {
+			const utility = selector.replace(/^\./, '').replace(/\\/g, '');
+
+			if (isUtilitySupported(utility, rule)) {
+				styles[utility] = {
+					style: getStyles(rule),
+					media
+				};
+			}
+		}
+	};
+
 	for (const rule of stylesheet.rules) {
 		if (rule.type === 'rule') {
-			for (const selector of rule.selectors) {
-				const utility = selector.replace(/^\./, '').replace(/\\/g, '');
+			addRule(rule);
+		}
 
-				if (isUtilitySupported(utility, rule)) {
-					styles[utility] = getStyles(rule);
+		if (rule.type === 'media') {
+			for (const childRule of rule.rules) {
+				if (childRule.type === 'rule') {
+					addRule(childRule, rule.media);
 				}
 			}
 		}
