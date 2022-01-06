@@ -47,5 +47,10 @@
 		"tsd": "^0.11.0",
 		"xo": "^0.39.1"
 	},
-	"prettier": "@vdemedes/prettier-config"
+	"prettier": "@vdemedes/prettier-config",
+	"xo": {
+		"rules": {
+			"import/extensions": "off"
+		}
+	}
 }
