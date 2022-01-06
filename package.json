@@ -36,19 +36,16 @@
 		"meow": "^7.0.1"
 	},
 	"devDependencies": {
+		"@vdemedes/prettier-config": "^1.0.1",
 		"ava": "^4.0.0",
 		"dataloader": "^2.0.0",
 		"execa": "^5.1.1",
 		"postcss": "^8.4.5",
-		"prettier": "^1.19.1",
+		"prettier": "^2.5.1",
 		"tailwindcss": "^3.0.11",
 		"tempfile": "^3.0.0",
 		"tsd": "^0.11.0",
 		"xo": "^0.30.0"
 	},
-	"prettier": {
-		"useTabs": true,
-		"singleQuote": true,
-		"bracketSpacing": false
-	}
+	"prettier": "@vdemedes/prettier-config"
 }
