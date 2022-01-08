@@ -1,11 +1,13 @@
-const evaluateStyle = object => {
-	const newObject = {};
+import {Style} from '../types';
+
+const evaluateStyle = (object: Style) => {
+	const newObject: Style = {};
 
 	for (const [key, value] of Object.entries(object)) {
 		if (!key.startsWith('--')) {
 			if (typeof value === 'string') {
 				newObject[key] = value.replace(/var\(([a-zA-Z-]+)\)/, (_, name) => {
-					return object[name];
+					return object[name] as string;
 				});
 			} else {
 				newObject[key] = value;
@@ -16,4 +18,4 @@ const evaluateStyle = object => {
 	return newObject;
 };
 
-module.exports = evaluateStyle;
+export default evaluateStyle;

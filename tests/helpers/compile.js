@@ -1,8 +1,8 @@
 const fs = require('fs');
 const execa = require('execa');
 const tempfile = require('tempfile');
-const build = require('../../source/build');
-const create = require('../../source/create');
+const build = require('../../dist/build').default;
+const create = require('../../dist/create').default;
 
 const compile = async (classNames, config, media) => {
 	const input = tempfile();

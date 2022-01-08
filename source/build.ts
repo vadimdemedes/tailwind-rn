@@ -1,20 +1,22 @@
-'use strict';
-const css = require('css');
-const cssToReactNative = require('css-to-react-native').default;
-const remToPx = require('./lib/rem-to-px');
+import * as css from 'css';
+import cssToReactNative, {StyleTuple} from 'css-to-react-native';
+import remToPx from './lib/rem-to-px';
+import {Styles} from './types';
 
-const getStyles = rule => {
-	const styles = rule.declarations
+const getStyles = (rule: css.Rule) => {
+	const styles: StyleTuple[] = (
+		rule.declarations as Array<Required<css.Declaration>>
+	)
 		.filter(({property, value}) => {
 			// Skip line-height utilities without units
-			if (property === 'line-height' && !value.endsWith('rem')) {
-				return false;
+			if (property === 'line-height') {
+				return typeof value === 'string' && value.endsWith('rem');
 			}
 
 			return true;
 		})
 		.map(({property, value}) => {
-			if (value.endsWith('rem')) {
+			if (typeof value === 'string' && value.endsWith('rem')) {
 				return [property, remToPx(value)];
 			}
 
@@ -98,7 +100,7 @@ const supportedPropertiesWithAuto = new Set([
 	'margin-left'
 ]);
 
-const isUtilitySupported = (utility, rule) => {
+const isUtilitySupported = (utility: string, rule: css.Rule) => {
 	// Skip unsupported utilities
 	if (
 		[
@@ -114,8 +116,14 @@ const isUtilitySupported = (utility, rule) => {
 		return false;
 	}
 
+	if (!Array.isArray(rule.declarations)) {
+		return false;
+	}
+
 	// Skip utilities with unsupported properties
-	for (const {property, value} of rule.declarations) {
+	for (const declaration of rule.declarations) {
+		const {property, value} = declaration as Required<css.Declaration>;
+
 		if (unsupportedProperties.has(property)) {
 			return false;
 		}
@@ -156,13 +164,21 @@ const isUtilitySupported = (utility, rule) => {
 	return true;
 };
 
-module.exports = source => {
+const build = (source: string) => {
 	const {stylesheet} = css.parse(source);
 
 	// Mapping of Tailwind class names to React Native styles
-	const styles = {};
+	const styles: Styles = {};
 
-	const addRule = (rule, media) => {
+	if (!stylesheet) {
+		return styles;
+	}
+
+	const addRule = (rule: css.Rule, media?: string) => {
+		if (!Array.isArray(rule.selectors)) {
+			return;
+		}
+
 		for (const selector of rule.selectors) {
 			const utility = selector.replace(/^\./, '').replace(/\\/g, '');
 
@@ -181,9 +197,11 @@ module.exports = source => {
 		}
 
 		if (rule.type === 'media') {
-			for (const childRule of rule.rules) {
+			const mediaRule = rule as Required<css.Media>;
+
+			for (const childRule of mediaRule.rules) {
 				if (childRule.type === 'rule') {
-					addRule(childRule, rule.media);
+					addRule(childRule, mediaRule.media);
 				}
 			}
 		}
@@ -191,3 +209,5 @@ module.exports = source => {
 
 	return styles;
 };
+
+export default build;

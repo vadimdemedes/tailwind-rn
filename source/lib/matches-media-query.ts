@@ -1,6 +1,10 @@
-const mediaQuery = require('css-mediaquery');
+import * as mediaQuery from 'css-mediaquery';
+import {Environment} from '../types';
 
-const isConditionSatisfied = (condition, value) => {
+const isConditionSatisfied = (
+	condition: mediaQuery.QueryNode,
+	value: boolean
+) => {
 	if (condition.inverse) {
 		if (value) {
 			return false;
@@ -16,13 +20,16 @@ const isConditionSatisfied = (condition, value) => {
 	return true;
 };
 
-const matchesMediaQuery = (query, media) => {
+const matchesMediaQuery = (
+	query: string,
+	environment: Environment
+): boolean => {
 	const conditions = mediaQuery.parse(query);
 
 	for (const condition of conditions) {
 		for (const expression of condition.expressions) {
 			if (expression.feature === 'prefers-color-scheme') {
-				const matches = expression.value === media.colorScheme;
+				const matches = expression.value === environment.colorScheme;
 
 				if (!isConditionSatisfied(condition, matches)) {
 					return false;
@@ -31,7 +38,7 @@ const matchesMediaQuery = (query, media) => {
 
 			if (expression.feature === 'prefers-reduced-motion') {
 				const enabled = expression.value === 'reduce';
-				const matches = enabled === media.reduceMotion;
+				const matches = enabled === environment.reduceMotion;
 
 				if (!isConditionSatisfied(condition, matches)) {
 					return false;
@@ -39,7 +46,7 @@ const matchesMediaQuery = (query, media) => {
 			}
 
 			if (expression.feature === 'orientation') {
-				const matches = expression.value === media.orientation;
+				const matches = expression.value === environment.orientation;
 
 				if (!isConditionSatisfied(condition, matches)) {
 					return false;
@@ -50,7 +57,7 @@ const matchesMediaQuery = (query, media) => {
 				const width = Number.parseInt(expression.value, 10);
 
 				if (expression.modifier === 'min') {
-					const matches = media.width >= width;
+					const matches = environment.width >= width;
 
 					if (!isConditionSatisfied(condition, matches)) {
 						return false;
@@ -58,7 +65,7 @@ const matchesMediaQuery = (query, media) => {
 				}
 
 				if (expression.modifier === 'max') {
-					const matches = media.width <= width;
+					const matches = environment.width <= width;
 
 					if (!isConditionSatisfied(condition, matches)) {
 						return false;
@@ -70,7 +77,7 @@ const matchesMediaQuery = (query, media) => {
 				const height = Number.parseInt(expression.value, 10);
 
 				if (expression.modifier === 'min') {
-					const matches = media.height >= height;
+					const matches = environment.height >= height;
 
 					if (!isConditionSatisfied(condition, matches)) {
 						return false;
@@ -78,7 +85,7 @@ const matchesMediaQuery = (query, media) => {
 				}
 
 				if (expression.modifier === 'max') {
-					const matches = media.height <= height;
+					const matches = environment.height <= height;
 
 					if (!isConditionSatisfied(condition, matches)) {
 						return false;
@@ -91,4 +98,4 @@ const matchesMediaQuery = (query, media) => {
 	return true;
 };
 
-module.exports = matchesMediaQuery;
+export default matchesMediaQuery;

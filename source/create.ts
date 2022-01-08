@@ -1,12 +1,13 @@
-'use strict';
-const evaluateStyle = require('./lib/evaluate-style');
-const emToPx = require('./lib/em-to-px');
-const matchesMediaQuery = require('./lib/matches-media-query');
+import evaluateStyle from './lib/evaluate-style';
+import emToPx from './lib/em-to-px';
+import matchesMediaQuery from './lib/matches-media-query';
+import {Styles, Style, Environment} from './types';
 
 // Font variant numeric utilities need a special treatment, because
 // there can be many font variant classes and they need to be transformed to an array
 const FONT_VARIANT_REGEX =
 	/(oldstyle-nums|lining-nums|tabular-nums|proportional-nums)/;
+
 const FONT_VARIANTS = [
 	'oldstyle-nums',
 	'lining-nums',
@@ -14,18 +15,20 @@ const FONT_VARIANTS = [
 	'proportional-nums'
 ];
 
-const addFontVariant = (style, classNames) => {
+const addFontVariant = (style: Style, classNames: string) => {
 	if (!FONT_VARIANT_REGEX.test(classNames)) {
 		return;
 	}
 
-	style.fontVariant = [];
+	const fontVariants: string[] = [];
 
 	for (const fontVariant of FONT_VARIANTS) {
 		if (classNames.includes(fontVariant)) {
-			style.fontVariant.push(fontVariant);
+			fontVariants.push(fontVariant);
 		}
 	}
+
+	style['fontVariant'] = fontVariants;
 };
 
 // Letter spacing also needs a special treatment, because its value is set
@@ -33,7 +36,11 @@ const addFontVariant = (style, classNames) => {
 const FONT_SIZE_REGEX = /text-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl|6xl)/;
 const LETTER_SPACING_REGEX = /(tracking-[a-z]+)/;
 
-const addLetterSpacing = (tailwindStyles, style, classNames) => {
+const addLetterSpacing = (
+	tailwindStyles: Styles,
+	style: Style,
+	classNames: string
+) => {
 	const letterSpacingMatches = LETTER_SPACING_REGEX.exec(classNames);
 
 	if (!letterSpacingMatches) {
@@ -49,25 +56,61 @@ const addLetterSpacing = (tailwindStyles, style, classNames) => {
 	}
 
 	const letterSpacingClass = letterSpacingMatches[0];
-	const {letterSpacing} = tailwindStyles[letterSpacingClass].style;
-	const fontSizeClass = fontSizeMatches[0];
-	const {fontSize} = tailwindStyles[fontSizeClass].style;
 
-	style.letterSpacing = emToPx(letterSpacing, fontSize);
+	if (typeof letterSpacingClass !== 'string') {
+		return;
+	}
+
+	const letterSpacingUtility = tailwindStyles[letterSpacingClass];
+
+	if (!letterSpacingUtility) {
+		return;
+	}
+
+	const {letterSpacing} = letterSpacingUtility.style;
+
+	if (typeof letterSpacing !== 'string') {
+		return;
+	}
+
+	const fontSizeClass = fontSizeMatches[0];
+
+	if (typeof fontSizeClass !== 'string') {
+		return;
+	}
+
+	const fontSizeUtility = tailwindStyles[fontSizeClass];
+
+	if (!fontSizeUtility) {
+		return;
+	}
+
+	const {fontSize} = fontSizeUtility.style;
+
+	if (typeof fontSize !== 'number') {
+		return;
+	}
+
+	style['letterSpacing'] = emToPx(letterSpacing, fontSize);
 };
 
-const defaultMedia = {
+const defaultMedia: Environment = {
 	orientation: 'portrait',
 	colorScheme: 'light',
-	reduceMotion: false
+	reduceMotion: false,
+	width: 0,
+	height: 0
 };
 
-const create = (tailwindStyles, media = defaultMedia) => {
+const create = (
+	tailwindStyles: Styles,
+	environment: Environment = defaultMedia
+) => {
 	// Pass a list of class names separated by a space, for example:
 	// "bg-green-100 text-green-800 font-semibold")
 	// and receive a styles object for use in React Native views
-	const tailwind = classNames => {
-		const style = {};
+	const tailwind = (classNames: string) => {
+		const style: Style = {};
 
 		if (!classNames) {
 			return style;
@@ -88,18 +131,19 @@ const create = (tailwindStyles, media = defaultMedia) => {
 			});
 
 		for (const className of separateClassNames) {
-			if (tailwindStyles[className]) {
-				const tailwindStyle = tailwindStyles[className];
+			const tailwindStyle = tailwindStyles[className];
 
-				if (tailwindStyle.media) {
-					if (matchesMediaQuery(tailwindStyle.media, media)) {
-						Object.assign(style, tailwindStyle.style);
-					}
-				} else {
+			if (!tailwindStyle) {
+				console.warn(`Unsupported Tailwind class: "${className}"`);
+				continue;
+			}
+
+			if (tailwindStyle.media) {
+				if (matchesMediaQuery(tailwindStyle.media, environment)) {
 					Object.assign(style, tailwindStyle.style);
 				}
 			} else {
-				console.warn(`Unsupported Tailwind class: "${className}"`);
+				Object.assign(style, tailwindStyle.style);
 			}
 		}
 
@@ -108,13 +152,16 @@ const create = (tailwindStyles, media = defaultMedia) => {
 
 	// Pass the class of a color (e.g. "bg-blue-500") and receive a color value (e.g. "#4399e1"),
 	// or a color and opacity (e.g. "bg-black bg-opacity-50") and get a color with opacity (e.g. "rgba(0,0,0,0.5)")
-	const getColor = classNames => {
-		const style = tailwind(classNames);
-		return style.backgroundColor || style.textColor;
+	const getColor = (classNames: string) => {
+		const style = tailwind(classNames) as {
+			backgroundColor?: string;
+			textColor?: string;
+		};
+
+		return style.backgroundColor ?? style.textColor;
 	};
 
 	return {tailwind, getColor};
 };
 
-module.exports = create;
-module.exports.default = create;
+export default create;
