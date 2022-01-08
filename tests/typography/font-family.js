@@ -18,7 +18,6 @@ test('font-inter', async t => {
 	});
 });
 
-// eslint-disable-next-line quotes
 tailwindTest("font-['Open_Sans']", {
 	fontFamily: 'Open Sans'
 });

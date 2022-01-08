@@ -44,7 +44,7 @@ const addLetterSpacing = (tailwindStyles, style, classNames) => {
 
 	if (!fontSizeMatches) {
 		throw new Error(
-			"Font size is required when applying letter spacing, e.g. 'text-lg tracking-tighter'" // eslint-disable-line quotes
+			"Font size is required when applying letter spacing, e.g. 'text-lg tracking-tighter'"
 		);
 	}
 

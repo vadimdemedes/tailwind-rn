@@ -54,6 +54,7 @@
 	},
 	"prettier": "@vdemedes/prettier-config",
 	"xo": {
+		"prettier": true,
 		"rules": {
 			"import/extensions": "off"
 		}
