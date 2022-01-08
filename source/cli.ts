@@ -13,5 +13,5 @@ if (!cli.input[0]) {
 }
 
 const source = fs.readFileSync(cli.input[0], 'utf8');
-const styles = build(source);
-fs.writeFileSync('styles.json', JSON.stringify(styles, null, '\t'));
+const utilities = build(source);
+fs.writeFileSync('tailwind.json', JSON.stringify(utilities, null, '\t'));

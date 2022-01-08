@@ -20,18 +20,6 @@ test('ignore unknown classes', async t => {
 	});
 });
 
-test('get color value', async t => {
-	const classNames = 'bg-blue-500';
-	const {getColor} = await compile(classNames);
-	t.is(getColor(classNames), 'rgb(59 130 246 / 1)');
-});
-
-test('get color with opacity value', async t => {
-	const classNames = 'bg-blue-500 bg-opacity-50';
-	const {getColor} = await compile(classNames);
-	t.is(getColor(classNames), 'rgb(59 130 246 / 0.5)');
-});
-
 test('ignore no value param', async t => {
 	const {tailwind} = await compile('');
 

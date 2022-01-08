@@ -7,13 +7,13 @@ import {
 } from '@react-native-community/hooks';
 import TailwindContext from './tailwind-context';
 import create from './create';
-import {Styles} from './types';
+import {Utilities} from './types';
 
 interface Props {
-	styles: Styles;
+	utilities: Utilities;
 }
 
-const TailwindProvider: React.FC<Props> = ({styles, children}) => {
+const TailwindProvider: React.FC<Props> = ({utilities, children}) => {
 	const colorScheme = useColorScheme() ?? 'light';
 	const {width, height} = useDimensions().window;
 	const {reduceMotionEnabled: reduceMotion} = useAccessibilityInfo();
@@ -22,14 +22,14 @@ const TailwindProvider: React.FC<Props> = ({styles, children}) => {
 		: 'landscape';
 
 	const tailwind = React.useMemo(() => {
-		return create(styles, {
+		return create(utilities, {
 			colorScheme,
 			width,
 			height,
 			reduceMotion: Boolean(reduceMotion),
 			orientation
-		}).tailwind;
-	}, [styles, colorScheme, width, height, reduceMotion, orientation]);
+		});
+	}, [utilities, colorScheme, width, height, reduceMotion, orientation]);
 
 	return (
 		<TailwindContext.Provider value={tailwind}>

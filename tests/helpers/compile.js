@@ -33,10 +33,12 @@ const compile = async (classNames, config, media) => {
 	await execa('npx', args);
 
 	const source = fs.readFileSync(output, 'utf8');
-	const styles = build(source);
+	const utilities = build(source);
+	const tailwind = create(utilities, media);
+
 	return {
-		...create(styles, media),
-		styles
+		tailwind,
+		utilities
 	};
 };
 

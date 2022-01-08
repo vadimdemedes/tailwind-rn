@@ -1,5 +1,5 @@
 export type Style = Record<string, unknown>;
-export type Styles = Record<
+export type Utilities = Record<
 	string,
 	{
 		style: Style;
