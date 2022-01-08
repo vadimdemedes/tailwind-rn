@@ -2,7 +2,7 @@ const fs = require('fs');
 const execa = require('execa');
 const tempfile = require('tempfile');
 const build = require('../../build');
-const create = require('../..');
+const create = require('../../create');
 
 const compile = async (classNames, config, media) => {
 	const input = tempfile();
@@ -34,7 +34,10 @@ const compile = async (classNames, config, media) => {
 
 	const source = fs.readFileSync(output, 'utf8');
 	const styles = build(source);
-	return create(styles, media);
+	return {
+		...create(styles, media),
+		styles
+	};
 };
 
 module.exports = compile;
