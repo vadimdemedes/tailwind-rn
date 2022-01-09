@@ -17,6 +17,7 @@
 		"node": ">=12"
 	},
 	"scripts": {
+		"build": "tsc",
 		"test": "xo && tsc && ava"
 	},
 	"files": [
