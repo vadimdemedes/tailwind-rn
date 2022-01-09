@@ -9,21 +9,21 @@ tailwindTest('text-transparent', {
 });
 
 tailwindTest('text-black', {
-	color: 'rgb(0 0 0 / 1)'
+	color: 'rgba(0, 0, 0, 1)'
 });
 
 tailwindTest('text-white', {
-	color: 'rgb(255 255 255 / 1)'
+	color: 'rgba(255, 255, 255, 1)'
 });
 
 tailwindTest('text-blue-500', {
-	color: 'rgb(59 130 246 / 1)'
+	color: 'rgba(59, 130, 246, 1)'
 });
 
 tailwindTest('text-blue-500/50', {
-	color: 'rgb(59 130 246 / 0.5)'
+	color: 'rgba(59, 130, 246, 0.5)'
 });
 
 tailwindTest('text-blue-500/[.67]', {
-	color: 'rgb(59 130 246 / .67)'
+	color: 'rgba(59, 130, 246, 0.67)'
 });

@@ -21,5 +21,5 @@ tailwindTest('decoration-blue-500', {
 });
 
 tailwindTest('decoration-blue-500/50', {
-	textDecorationColor: 'rgb(59 130 246 / 0.5)'
+	textDecorationColor: 'rgba(59, 130, 246, 0.5)'
 });

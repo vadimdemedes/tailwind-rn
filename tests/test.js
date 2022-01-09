@@ -6,8 +6,8 @@ test('get styles for multiple classes', async t => {
 	const {tailwind} = await compile(classNames);
 
 	t.deepEqual(tailwind(classNames), {
-		color: 'rgb(59 130 246 / 1)',
-		backgroundColor: 'rgb(219 234 254 / 1)'
+		color: 'rgba(59, 130, 246, 1)',
+		backgroundColor: 'rgba(219, 234, 254, 1)'
 	});
 });
 
@@ -16,7 +16,7 @@ test('ignore unknown classes', async t => {
 	const {tailwind} = await compile(classNames);
 
 	t.deepEqual(tailwind(classNames), {
-		color: 'rgb(59 130 246 / 1)'
+		color: 'rgba(59, 130, 246, 1)'
 	});
 });
 
@@ -33,8 +33,8 @@ test('ignore extra spaces', async t => {
 	const {tailwind} = await compile('text-blue-500 bg-blue-100');
 
 	t.deepEqual(tailwind('text-blue-500  bg-blue-100'), {
-		color: 'rgb(59 130 246 / 1)',
-		backgroundColor: 'rgb(219 234 254 / 1)'
+		color: 'rgba(59, 130, 246, 1)',
+		backgroundColor: 'rgba(219, 234, 254, 1)'
 	});
 
 	t.deepEqual(
@@ -43,8 +43,8 @@ test('ignore extra spaces', async t => {
 		bg-blue-100
 	`),
 		{
-			color: 'rgb(59 130 246 / 1)',
-			backgroundColor: 'rgb(219 234 254 / 1)'
+			color: 'rgba(59, 130, 246, 1)',
+			backgroundColor: 'rgba(219, 234, 254, 1)'
 		}
 	);
 });

@@ -7,7 +7,7 @@ test('light mode', async t => {
 	});
 
 	t.deepEqual(tailwind('bg-white dark:bg-black'), {
-		backgroundColor: 'rgb(255 255 255 / 1)'
+		backgroundColor: 'rgba(255, 255, 255, 1)'
 	});
 });
 
@@ -17,7 +17,7 @@ test('dark mode', async t => {
 	});
 
 	t.deepEqual(tailwind('bg-white dark:bg-black'), {
-		backgroundColor: 'rgb(0 0 0 / 1)'
+		backgroundColor: 'rgba(0, 0, 0, 1)'
 	});
 });
 
@@ -31,7 +31,7 @@ test('without reduced motion', async t => {
 	);
 
 	t.deepEqual(tailwind('bg-white motion-reduce:bg-black'), {
-		backgroundColor: 'rgb(255 255 255 / 1)'
+		backgroundColor: 'rgba(255, 255, 255, 1)'
 	});
 });
 
@@ -45,7 +45,7 @@ test('with reduced motion', async t => {
 	);
 
 	t.deepEqual(tailwind('bg-white motion-reduce:bg-black'), {
-		backgroundColor: 'rgb(0 0 0 / 1)'
+		backgroundColor: 'rgba(0, 0, 0, 1)'
 	});
 });
 
@@ -55,7 +55,7 @@ test('matches portrait', async t => {
 	});
 
 	t.deepEqual(tailwind('bg-white portrait:bg-black'), {
-		backgroundColor: 'rgb(0 0 0 / 1)'
+		backgroundColor: 'rgba(0, 0, 0, 1)'
 	});
 });
 
@@ -65,7 +65,7 @@ test('does not match portrait', async t => {
 	});
 
 	t.deepEqual(tailwind('bg-white portrait:bg-black'), {
-		backgroundColor: 'rgb(255 255 255 / 1)'
+		backgroundColor: 'rgba(255, 255, 255, 1)'
 	});
 });
 
@@ -75,7 +75,7 @@ test('matches landscape', async t => {
 	});
 
 	t.deepEqual(tailwind('bg-white landscape:bg-black'), {
-		backgroundColor: 'rgb(0 0 0 / 1)'
+		backgroundColor: 'rgba(0, 0, 0, 1)'
 	});
 });
 
@@ -85,7 +85,7 @@ test('does not match landscape', async t => {
 	});
 
 	t.deepEqual(tailwind('bg-white landscape:bg-black'), {
-		backgroundColor: 'rgb(255 255 255 / 1)'
+		backgroundColor: 'rgba(255, 255, 255, 1)'
 	});
 });
 
@@ -95,7 +95,7 @@ test('matches min-width', async t => {
 	});
 
 	t.deepEqual(tailwind('bg-white sm:bg-black'), {
-		backgroundColor: 'rgb(0 0 0 / 1)'
+		backgroundColor: 'rgba(0, 0, 0, 1)'
 	});
 });
 
@@ -105,7 +105,7 @@ test('does not match min-width', async t => {
 	});
 
 	t.deepEqual(tailwind('bg-white sm:bg-black'), {
-		backgroundColor: 'rgb(255 255 255 / 1)'
+		backgroundColor: 'rgba(255, 255, 255, 1)'
 	});
 });
 
@@ -125,7 +125,7 @@ test('matches custom min-width', async t => {
 	);
 
 	t.deepEqual(tailwind('bg-white tablet:bg-black'), {
-		backgroundColor: 'rgb(0 0 0 / 1)'
+		backgroundColor: 'rgba(0, 0, 0, 1)'
 	});
 });
 
@@ -145,7 +145,7 @@ test('does not match custom min-width', async t => {
 	);
 
 	t.deepEqual(tailwind('bg-white tablet:bg-black'), {
-		backgroundColor: 'rgb(255 255 255 / 1)'
+		backgroundColor: 'rgba(255, 255, 255, 1)'
 	});
 });
 
@@ -167,7 +167,7 @@ test('matches max-width', async t => {
 	);
 
 	t.deepEqual(tailwind('bg-white tablet:bg-black'), {
-		backgroundColor: 'rgb(0 0 0 / 1)'
+		backgroundColor: 'rgba(0, 0, 0, 1)'
 	});
 });
 
@@ -189,7 +189,7 @@ test('does not match max-width', async t => {
 	);
 
 	t.deepEqual(tailwind('bg-white tablet:bg-black'), {
-		backgroundColor: 'rgb(255 255 255 / 1)'
+		backgroundColor: 'rgba(255, 255, 255, 1)'
 	});
 });
 
@@ -212,7 +212,7 @@ test('matches fixed-range breakpoint', async t => {
 	);
 
 	t.deepEqual(tailwind('bg-white tablet:bg-black'), {
-		backgroundColor: 'rgb(0 0 0 / 1)'
+		backgroundColor: 'rgba(0, 0, 0, 1)'
 	});
 });
 
@@ -235,7 +235,7 @@ test('does not match fixed-range breakpoint', async t => {
 	);
 
 	t.deepEqual(tailwind('bg-white tablet:bg-black'), {
-		backgroundColor: 'rgb(255 255 255 / 1)'
+		backgroundColor: 'rgba(255, 255, 255, 1)'
 	});
 });
 
@@ -257,7 +257,7 @@ test('matches custom media query', async t => {
 	);
 
 	t.deepEqual(tailwind('bg-white tablet:bg-black'), {
-		backgroundColor: 'rgb(0 0 0 / 1)'
+		backgroundColor: 'rgba(0, 0, 0, 1)'
 	});
 });
 
@@ -279,6 +279,6 @@ test('does not match custom media query', async t => {
 	);
 
 	t.deepEqual(tailwind('bg-white tablet:bg-black'), {
-		backgroundColor: 'rgb(255 255 255 / 1)'
+		backgroundColor: 'rgba(255, 255, 255, 1)'
 	});
 });

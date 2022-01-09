@@ -79,7 +79,7 @@ test.serial('apply style', async t => {
 	const style = await render('bg-white');
 
 	t.deepEqual(style, {
-		backgroundColor: 'rgb(255 255 255 / 1)'
+		backgroundColor: 'rgba(255, 255, 255, 1)'
 	});
 });
 
@@ -89,7 +89,7 @@ test.serial('light mode', async t => {
 	const style = await render('bg-white dark:bg-black');
 
 	t.deepEqual(style, {
-		backgroundColor: 'rgb(255 255 255 / 1)'
+		backgroundColor: 'rgba(255, 255, 255, 1)'
 	});
 });
 
@@ -99,7 +99,7 @@ test.serial('dark mode', async t => {
 	const style = await render('bg-white dark:bg-black');
 
 	t.deepEqual(style, {
-		backgroundColor: 'rgb(0 0 0 / 1)'
+		backgroundColor: 'rgba(0, 0, 0, 1)'
 	});
 });
 
@@ -109,7 +109,7 @@ test.serial('without reduced motion', async t => {
 	const style = await render('bg-white motion-reduce:bg-black');
 
 	t.deepEqual(style, {
-		backgroundColor: 'rgb(255 255 255 / 1)'
+		backgroundColor: 'rgba(255, 255, 255, 1)'
 	});
 });
 
@@ -119,7 +119,7 @@ test.serial('with reduced motion', async t => {
 	const style = await render('bg-white motion-reduce:bg-black');
 
 	t.deepEqual(style, {
-		backgroundColor: 'rgb(0 0 0 / 1)'
+		backgroundColor: 'rgba(0, 0, 0, 1)'
 	});
 });
 
@@ -129,7 +129,7 @@ test.serial('matches portrait', async t => {
 	const style = await render('bg-white portrait:bg-black');
 
 	t.deepEqual(style, {
-		backgroundColor: 'rgb(0 0 0 / 1)'
+		backgroundColor: 'rgba(0, 0, 0, 1)'
 	});
 });
 
@@ -139,7 +139,7 @@ test.serial('does not match portrait', async t => {
 	const style = await render('bg-white portrait:bg-black');
 
 	t.deepEqual(style, {
-		backgroundColor: 'rgb(255 255 255 / 1)'
+		backgroundColor: 'rgba(255, 255, 255, 1)'
 	});
 });
 
@@ -149,7 +149,7 @@ test.serial('matches landscape', async t => {
 	const style = await render('bg-white landscape:bg-black');
 
 	t.deepEqual(style, {
-		backgroundColor: 'rgb(0 0 0 / 1)'
+		backgroundColor: 'rgba(0, 0, 0, 1)'
 	});
 });
 
@@ -159,7 +159,7 @@ test.serial('does not match landscape', async t => {
 	const style = await render('bg-white landscape:bg-black');
 
 	t.deepEqual(style, {
-		backgroundColor: 'rgb(255 255 255 / 1)'
+		backgroundColor: 'rgba(255, 255, 255, 1)'
 	});
 });
 
@@ -169,7 +169,7 @@ test.serial('matches width breakpoint', async t => {
 	const style = await render('bg-white sm:bg-black');
 
 	t.deepEqual(style, {
-		backgroundColor: 'rgb(0 0 0 / 1)'
+		backgroundColor: 'rgba(0, 0, 0, 1)'
 	});
 });
 
@@ -179,7 +179,7 @@ test.serial('does not match width breakpoint', async t => {
 	const style = await render('bg-white sm:bg-black');
 
 	t.deepEqual(style, {
-		backgroundColor: 'rgb(255 255 255 / 1)'
+		backgroundColor: 'rgba(255, 255, 255, 1)'
 	});
 });
 
@@ -189,7 +189,7 @@ test.serial('matches height breakpoint', async t => {
 	const style = await render('bg-white sm-height:bg-black');
 
 	t.deepEqual(style, {
-		backgroundColor: 'rgb(0 0 0 / 1)'
+		backgroundColor: 'rgba(0, 0, 0, 1)'
 	});
 });
 
@@ -199,6 +199,6 @@ test.serial('does not match height breakpoint', async t => {
 	const style = await render('bg-white sm-height:bg-black');
 
 	t.deepEqual(style, {
-		backgroundColor: 'rgb(255 255 255 / 1)'
+		backgroundColor: 'rgba(255, 255, 255, 1)'
 	});
 });
