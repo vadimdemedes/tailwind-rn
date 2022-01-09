@@ -11,7 +11,7 @@
 	},
 	"main": "dist",
 	"bin": {
-		"create-tailwind-rn": "dist/cli.js"
+		"tailwind-rn": "dist/cli.js"
 	},
 	"engines": {
 		"node": ">=12"
@@ -30,6 +30,7 @@
 	],
 	"dependencies": {
 		"@react-native-community/hooks": "^2.8.1",
+		"chokidar": "^3.5.2",
 		"css": "^3.0.0",
 		"css-mediaquery": "^0.1.2",
 		"css-to-react-native": "^3.0.0",
@@ -57,7 +58,6 @@
 		"xo": "^0.39.1"
 	},
 	"peerDependencies": {
-		"react": "*",
 		"react-native": "*",
 		"tailwindcss": "^3.0.0"
 	},
