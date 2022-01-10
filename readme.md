@@ -4,7 +4,7 @@
 
 ![](header.jpg)
 
-All styles are generated directly from Tailwind's output, so they're always up-to-date with the latest Tailwind.
+All styles are generated directly from Tailwind's output, so they're always up-to-date.
 
 - JIT mode
 - Responsive breakpoints (e.g. `sm`, `md`, `lg`)
