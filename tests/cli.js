@@ -5,7 +5,7 @@ const execa = require('execa');
 const tempy = require('tempy');
 const create = require('../dist/create').default;
 
-test('no arguments', async t => {
+test.serial('no arguments', async t => {
 	await tempy.directory.task(async cwd => {
 		fs.writeFileSync(path.join(cwd, 'app.js'), 'text-black');
 		fs.writeFileSync(path.join(cwd, 'input.css'), '@tailwind utilities;');
@@ -33,7 +33,7 @@ test('no arguments', async t => {
 	});
 });
 
-test('custom input file', async t => {
+test.serial('custom input file', async t => {
 	await tempy.directory.task(async cwd => {
 		fs.writeFileSync(path.join(cwd, 'app.js'), 'text-black');
 		fs.writeFileSync(path.join(cwd, 'input.css'), '@tailwind utilities;');
@@ -65,7 +65,7 @@ test('custom input file', async t => {
 	});
 });
 
-test('custom output file', async t => {
+test.serial('custom output file', async t => {
 	await tempy.directory.task(async cwd => {
 		fs.writeFileSync(path.join(cwd, 'app.js'), 'text-black');
 		fs.writeFileSync(path.join(cwd, 'input.css'), '@tailwind utilities;');

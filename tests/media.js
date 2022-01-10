@@ -1,7 +1,7 @@
 const test = require('ava');
 const compile = require('./helpers/compile');
 
-test('light mode', async t => {
+test.serial('light mode', async t => {
 	const {tailwind} = await compile('bg-white dark:bg-black', undefined, {
 		colorScheme: 'light'
 	});
@@ -11,7 +11,7 @@ test('light mode', async t => {
 	});
 });
 
-test('dark mode', async t => {
+test.serial('dark mode', async t => {
 	const {tailwind} = await compile('bg-white dark:bg-black', undefined, {
 		colorScheme: 'dark'
 	});
@@ -21,7 +21,7 @@ test('dark mode', async t => {
 	});
 });
 
-test('without reduced motion', async t => {
+test.serial('without reduced motion', async t => {
 	const {tailwind} = await compile(
 		'bg-white motion-reduce:bg-black',
 		undefined,
@@ -35,7 +35,7 @@ test('without reduced motion', async t => {
 	});
 });
 
-test('with reduced motion', async t => {
+test.serial('with reduced motion', async t => {
 	const {tailwind} = await compile(
 		'bg-white motion-reduce:bg-black',
 		undefined,
@@ -49,7 +49,7 @@ test('with reduced motion', async t => {
 	});
 });
 
-test('matches portrait', async t => {
+test.serial('matches portrait', async t => {
 	const {tailwind} = await compile('bg-white portrait:bg-black', undefined, {
 		orientation: 'portrait'
 	});
@@ -59,7 +59,7 @@ test('matches portrait', async t => {
 	});
 });
 
-test('does not match portrait', async t => {
+test.serial('does not match portrait', async t => {
 	const {tailwind} = await compile('bg-white portrait:bg-black', undefined, {
 		orientation: 'landscape'
 	});
@@ -69,7 +69,7 @@ test('does not match portrait', async t => {
 	});
 });
 
-test('matches landscape', async t => {
+test.serial('matches landscape', async t => {
 	const {tailwind} = await compile('bg-white landscape:bg-black', undefined, {
 		orientation: 'landscape'
 	});
@@ -79,7 +79,7 @@ test('matches landscape', async t => {
 	});
 });
 
-test('does not match landscape', async t => {
+test.serial('does not match landscape', async t => {
 	const {tailwind} = await compile('bg-white landscape:bg-black', undefined, {
 		orientation: 'portrait'
 	});
@@ -89,7 +89,7 @@ test('does not match landscape', async t => {
 	});
 });
 
-test('matches min-width', async t => {
+test.serial('matches min-width', async t => {
 	const {tailwind} = await compile('bg-white sm:bg-black', undefined, {
 		width: 1000
 	});
@@ -99,7 +99,7 @@ test('matches min-width', async t => {
 	});
 });
 
-test('does not match min-width', async t => {
+test.serial('does not match min-width', async t => {
 	const {tailwind} = await compile('bg-white sm:bg-black', undefined, {
 		width: 100
 	});
@@ -109,7 +109,7 @@ test('does not match min-width', async t => {
 	});
 });
 
-test('matches custom min-width', async t => {
+test.serial('matches custom min-width', async t => {
 	const {tailwind} = await compile(
 		'bg-white tablet:bg-black',
 		{
@@ -129,7 +129,7 @@ test('matches custom min-width', async t => {
 	});
 });
 
-test('does not match custom min-width', async t => {
+test.serial('does not match custom min-width', async t => {
 	const {tailwind} = await compile(
 		'bg-white tablet:bg-black',
 		{
@@ -149,7 +149,7 @@ test('does not match custom min-width', async t => {
 	});
 });
 
-test('matches max-width', async t => {
+test.serial('matches max-width', async t => {
 	const {tailwind} = await compile(
 		'bg-white tablet:bg-black',
 		{
@@ -171,7 +171,7 @@ test('matches max-width', async t => {
 	});
 });
 
-test('does not match max-width', async t => {
+test.serial('does not match max-width', async t => {
 	const {tailwind} = await compile(
 		'bg-white tablet:bg-black',
 		{
@@ -193,7 +193,7 @@ test('does not match max-width', async t => {
 	});
 });
 
-test('matches fixed-range breakpoint', async t => {
+test.serial('matches fixed-range breakpoint', async t => {
 	const {tailwind} = await compile(
 		'bg-white tablet:bg-black',
 		{
@@ -216,7 +216,7 @@ test('matches fixed-range breakpoint', async t => {
 	});
 });
 
-test('does not match fixed-range breakpoint', async t => {
+test.serial('does not match fixed-range breakpoint', async t => {
 	const {tailwind} = await compile(
 		'bg-white tablet:bg-black',
 		{
@@ -239,7 +239,7 @@ test('does not match fixed-range breakpoint', async t => {
 	});
 });
 
-test('matches custom media query', async t => {
+test.serial('matches custom media query', async t => {
 	const {tailwind} = await compile(
 		'bg-white tablet:bg-black',
 		{
@@ -261,7 +261,7 @@ test('matches custom media query', async t => {
 	});
 });
 
-test('does not match custom media query', async t => {
+test.serial('does not match custom media query', async t => {
 	const {tailwind} = await compile(
 		'bg-white tablet:bg-black',
 		{
