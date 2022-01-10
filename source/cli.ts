@@ -7,31 +7,56 @@ import buildTailwind from './build';
 const cli = meow(
 	`
 	Usage
-	  $ create-tailwind-rn [output.css]
+	  $ tailwind-rn [options]
+
+	Options
+	  -i, --input    Path to CSS file that Tailwind generates (default: tailwind.css)
+	  -o, --output   Output file (default: tailwind.json)
+	  -w, --watch    Watch for changes and rebuild as needed
 `,
 	{
 		flags: {
+			input: {
+				type: 'string',
+				alias: 'i',
+				default: 'tailwind.css'
+			},
+			output: {
+				type: 'string',
+				alias: 'o',
+				default: 'tailwind.json'
+			},
 			watch: {
-				alias: 'w',
-				type: 'boolean'
+				type: 'boolean',
+				alias: 'w'
 			}
 		}
 	}
 );
 
-if (!cli.input[0]) {
-	throw new Error('Path to output CSS is missing');
+const {input, output, watch} = cli.flags;
+
+let inputExists;
+
+try {
+	fs.statSync(input);
+	inputExists = true;
+} catch {
+	inputExists = false;
 }
 
-const input = cli.input[0];
+if (!inputExists) {
+	console.error(`Input file "${input}" doesn't exist`);
+	process.exit(1);
+}
 
 const build = () => {
 	const source = fs.readFileSync(input, 'utf8');
 	const utilities = buildTailwind(source);
-	fs.writeFileSync('tailwind.json', JSON.stringify(utilities, null, '\t'));
+	fs.writeFileSync(output, JSON.stringify(utilities, null, '\t'));
 };
 
-if (cli.flags.watch) {
+if (watch) {
 	chokidar.watch(input).on('all', build);
 } else {
 	build();
