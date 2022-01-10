@@ -2,7 +2,11 @@
 
 > Use [Tailwind CSS](https://tailwindcss.com) in [React Native](https://reactnative.dev) projects
 
-All styles are generated from Tailwind CSS source and not hard-coded, which makes it easy to keep this module up-to-date with latest changes in Tailwind CSS itself.
+All styles are generated directly from Tailwind's output, so they're always up-to-date with the latest Tailwind.
+
+- [x] JIT mode
+- [x] Responsive breakpoints (e.g. `sm`, `md`, `lg`)
+- [x] Supports custom configuration
 
 ![](header.jpg)
 
@@ -10,30 +14,80 @@ All styles are generated from Tailwind CSS source and not hard-coded, which make
 
 ```
 $ npm install tailwind-rn
+$ npm install --save-dev tailwindcss
 ```
+
+Alternatively, run the following command to automatically add `tailwind-rn` to your React Native project:
+
+```
+$ npx setup-tailwind-rn
+```
+
+## Getting Started
+
+<details>
+	<summary>Manual setup</summary>
+
+    ### Manual setup
+
+    1. Install `tailwind-rn`.
+
+    ```
+    $ npm install tailwind-rn
+    ```
+
+    2. Install Tailwind and `concurrently`.
+
+    ```
+    $ npm install --save-dev tailwindcss concurrently
+    ```
+
+    3. Create Tailwind config and necessary files.
+
+    ```
+    $ npx tailwindcss init
+    $ echo '@tailwind utilities;' > input.css
+    ```
+
+    4. Add scripts to compile Tailwind styles to package.json.
+
+    ```diff
+    {
+    	"scripts": {
+    +		"build:tailwind": "tailwindcss --input input.css --output tailwind.css --no-autoprefixer && tailwind-rn",
+    +		"dev:tailwind": "concurrently "tailwindcss --input input.css --output tailwind.css --no-autoprefixer --watch" "tailwind-rn --watch"
+    	}
+    }
+    ```
+
+</details>
 
 ## Usage
 
-Import `tailwind-rn` module and use any of the [supported utilities](#supported-utilities) from [Tailwind CSS](https://tailwindcss.com) in your [React Native](https://reactnative.dev) views.
+Use `useTailwind` React hook and apply any of the [supported utilities](#supported-utilities) from [Tailwind](https://tailwindcss.com) in your [React Native](https://reactnative.dev) views.
 
-```js
+```jsx
 import React from 'react';
 import {SafeAreaView, View, Text} from 'react-native';
-import tailwind from 'tailwind-rn';
+import {useTailwind} from 'tailwind-rn';
 
-const App = () => (
-	<SafeAreaView style={tailwind('h-full')}>
-		<View style={tailwind('pt-12 items-center')}>
-			<View style={tailwind('bg-blue-200 px-3 py-1 rounded-full')}>
-				<Text style={tailwind('text-blue-800 font-semibold')}>
-					Hello Tailwind
-				</Text>
+const Hello = () => {
+	const tailwind = useTailwind();
+
+	return (
+		<SafeAreaView style={tailwind('h-full')}>
+			<View style={tailwind('pt-12 items-center')}>
+				<View style={tailwind('bg-blue-200 px-3 py-1 rounded-full')}>
+					<Text style={tailwind('text-blue-800 font-semibold')}>
+						Hello Tailwind
+					</Text>
+				</View>
 			</View>
-		</View>
-	</SafeAreaView>
-);
+		</SafeAreaView>
+	);
+};
 
-export default App;
+export default Hello;
 ```
 
 <img src="screenshot.jpg" width="544">
@@ -118,109 +172,3 @@ tailwind('pt-12 items-center');
 ### Interactivity
 
 - [Pointer Events](https://tailwindcss.com/docs/pointer-events)
-
-## Customization
-
-This package exposes a `create-tailwind-rn` CLI for creating a custom build of `tailwind-rn` using your configuration.
-This guide assumes that you already have Tailwind CSS and `tailwind-rn` installed.
-
-#### 1. Create Tailwind configuration
-
-See Tailwind's official documentation on [configuration](https://tailwindcss.com/docs/configuration) to learn more.
-
-```
-$ npx tailwindcss init
-```
-
-#### 2. Generate styles for `tailwind-rn`
-
-This command will generate a `styles.json` file, based on your Tailwind configuration.
-Add this file to your version control system, because it's going to be needed when initializing `tailwind-rn`.
-
-```
-$ npx create-tailwind-rn
-```
-
-#### 3. Create a custom `tailwind()` function
-
-Use `create()` function to generate the same `tailwind()` and `getColor()` functions, but with your custom styles applied.
-
-```js
-import {create} from 'tailwind-rn';
-import styles from './styles.json';
-
-const {tailwind, getColor} = create(styles);
-
-tailwind('text-blue-500 text-opacity-50');
-//=> {color: 'rgba(66, 153, 225, 0.5)'}
-```
-
-Initializing `tailwind-rn` like that in every file you use it is not convenient.
-I'd recommend creating a `tailwind.js` file where you do it once and import it everywhere instead:
-
-**tailwind.js**
-
-```js
-import {create} from 'tailwind-rn';
-import styles from './styles.json';
-
-const {tailwind, getColor} = create(styles);
-export {tailwind, getColor};
-```
-
-You could also create an [alias](https://medium.com/@sterlingcobb/adding-alias-to-create-react-native-app-crna-in-2-minutes-45574f4a7729) for that file, so that you could import it using an absolute path from anywhere in your project:
-
-```js
-// Before
-import {tailwind} from '../../../tailwind';
-
-// After
-import {tailwind} from 'tailwind';
-```
-
-## API
-
-### tailwind(classNames)
-
-#### classNames
-
-Type: `string[]`
-
-Array of Tailwind CSS classes you want to generate styles for.
-
-### getColor(color)
-
-Get color value from Tailwind CSS color name.
-
-```js
-import {getColor} from 'tailwind-rn';
-
-getColor('blue-500');
-//=> '#ebf8ff'
-```
-
-To get a color with opacity:
-
-```js
-import {getColor} from 'tailwind-rn';
-
-getColor('blue-500 opacity-50');
-//=> 'rgba(66, 153, 225, 0.5)'
-```
-
-You can use Tailwind's values for [color](https://tailwindcss.com/docs/background-color) and [opacity](https://tailwindcss.com/docs/background-opacity).
-
-> NOTE: For _color_ you must NOT include the `bg-` prefix.
-
-### create(styles)
-
-Create `tailwind()` and `getColor()` functions, which use custom styles.
-API of these functions remains the same.
-
-See [Customization](#customization).
-
-#### styles
-
-Type: `object`
-
-Styles generated by `create-tailwind-rn` CLI.
