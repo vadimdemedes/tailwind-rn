@@ -2,6 +2,8 @@
 
 > Use [Tailwind](https://tailwindcss.com) in [React Native](https://reactnative.dev) projects
 
+![](header.jpg)
+
 All styles are generated directly from Tailwind's output, so they're always up-to-date with the latest Tailwind.
 
 - JIT mode
@@ -9,7 +11,7 @@ All styles are generated directly from Tailwind's output, so they're always up-t
 - Dark mode
 - Custom configuration
 
-![](header.jpg)
+[Migrating from v3.x?](migrate.md)
 
 ## Install
 
