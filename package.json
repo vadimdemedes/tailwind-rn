@@ -9,23 +9,19 @@
 		"email": "vdemedes@gmail.com",
 		"url": "https://vadimdemedes.com"
 	},
+	"main": "dist",
 	"bin": {
-		"create-tailwind-rn": "cli.js"
+		"tailwind-rn": "dist/cli.js"
 	},
 	"engines": {
-		"node": ">=10"
+		"node": ">=12"
 	},
 	"scripts": {
-		"build": "node cli",
-		"prepare": "npm run build",
-		"test": "xo && tsd && ava"
+		"build": "tsc",
+		"test": "xo && tsc && ava"
 	},
 	"files": [
-		"build.js",
-		"cli.js",
-		"index.js",
-		"index.d.ts",
-		"styles.json"
+		"dist"
 	],
 	"keywords": [
 		"tailwind",
@@ -33,26 +29,56 @@
 		"react-native"
 	],
 	"dependencies": {
-		"css": "^2.2.4",
+		"@react-native-community/hooks": "^2.8.1",
+		"chokidar": "^3.5.2",
+		"color-string": "^1.9.0",
+		"css": "^3.0.0",
+		"css-mediaquery": "^0.1.2",
 		"css-to-react-native": "^3.0.0",
-		"match-all": "^1.2.6",
-		"meow": "^7.0.1",
-		"postcss": "^8.1.14"
+		"meow": "^7.0.1"
 	},
 	"devDependencies": {
-		"@ava/babel": "^1.0.1",
-		"ava": "^3.5.0",
-		"prettier": "^1.19.1",
-		"tailwindcss": "^2.0.2",
-		"tsd": "^0.11.0",
-		"xo": "^0.30.0"
+		"@sindresorhus/tsconfig": "^0.9.0",
+		"@types/color-string": "^1.5.2",
+		"@types/css": "^0.0.33",
+		"@types/css-mediaquery": "^0.1.1",
+		"@types/css-to-react-native": "^3.0.0",
+		"@types/react": "^17.0.38",
+		"@types/react-native": "^0.66.11",
+		"@vdemedes/prettier-config": "^1.0.1",
+		"ava": "^4.0.0",
+		"dataloader": "^2.0.0",
+		"delay": "^5.0.0",
+		"execa": "^5.1.1",
+		"postcss": "^8.4.5",
+		"prettier": "^2.5.1",
+		"react": "^17.0.2",
+		"react-test-renderer": "^17.0.2",
+		"tailwindcss": "^3.0.11",
+		"tempy": "^1.0.1",
+		"typescript": "^4.5.4",
+		"xo": "^0.39.1"
 	},
-	"ava": {
-		"babel": true
+	"peerDependencies": {
+		"react-native": "*",
+		"tailwindcss": "^3.0.0"
 	},
-	"prettier": {
-		"useTabs": true,
-		"singleQuote": true,
-		"bracketSpacing": false
+	"prettier": "@vdemedes/prettier-config",
+	"xo": {
+		"prettier": true,
+		"rules": {
+			"import/extensions": "off",
+			"import/no-extraneous-dependencies": [
+				"error",
+				{
+					"peerDependencies": true
+				}
+			]
+		},
+		"settings": {
+			"import/ignore": [
+				"react-native"
+			]
+		}
 	}
 }
