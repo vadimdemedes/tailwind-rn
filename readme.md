@@ -54,6 +54,8 @@ These commands will create the following files:
 - **tailwind.config.js** - Tailwind configuration file.
 - **input.css** - Entrypoint for Tailwind compiler. It's required to override the output of Tailwind, so that it doesn't generate CSS for resetting browser styles, which will cause `tailwind-rn` to fail.
 
+Make sure to configure [`content`](https://tailwindcss.com/docs/content-configuration) part of the config in **tailwind.config.js** to point to your JavaScript files to speed up compilation.
+
 4. Add scripts to build Tailwind styles in package.json.
 
 ```diff
