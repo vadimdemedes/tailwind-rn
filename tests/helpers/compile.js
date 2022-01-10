@@ -1,17 +1,17 @@
 const fs = require('fs');
 const execa = require('execa');
-const tempfile = require('tempfile');
+const tempy = require('tempy');
 const build = require('../../dist/build').default;
 const create = require('../../dist/create').default;
 
 const compile = async (classNames, config, media) => {
-	const input = tempfile();
+	const input = tempy.file();
 	fs.writeFileSync(input, '@tailwind utilities;');
 
-	const content = tempfile();
+	const content = tempy.file();
 	fs.writeFileSync(content, classNames);
 
-	const output = tempfile();
+	const output = tempy.file();
 
 	const args = [
 		'tailwindcss',
@@ -25,7 +25,7 @@ const compile = async (classNames, config, media) => {
 	];
 
 	if (config) {
-		const path = tempfile();
+		const path = tempy.file();
 		fs.writeFileSync(path, `module.exports = ${JSON.stringify(config)}`);
 		args.push('--config', path);
 	}
