@@ -1,20 +1,22 @@
-import * as React from 'react';
-import {useColorScheme} from 'react-native';
 import {
-	useDimensions,
 	useAccessibilityInfo,
-	useDeviceOrientation
+	useDeviceOrientation,
+	useDimensions
 } from '@react-native-community/hooks';
-import TailwindContext from './tailwind-context';
+import * as React from 'react';
+import {useColorScheme, ColorSchemeName} from 'react-native';
+
 import create from './create';
+import TailwindContext from './tailwind-context';
 import {Utilities} from './types';
 
 interface Props {
 	utilities: Utilities;
+	theme?: ColorSchemeName;
 }
 
-const TailwindProvider: React.FC<Props> = ({utilities, children}) => {
-	const colorScheme = useColorScheme() ?? 'light';
+const TailwindProvider: React.FC<Props> = ({utilities, theme, children}) => {
+	const colorScheme = theme ?? useColorScheme() ?? 'light';
 	const {width, height} = useDimensions().window;
 	const {reduceMotionEnabled: reduceMotion} = useAccessibilityInfo();
 	const orientation = useDeviceOrientation().portrait
