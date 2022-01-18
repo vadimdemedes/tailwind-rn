@@ -193,7 +193,7 @@ const App = () => (
 
 Type: `string | undefined | null`
 
-Manually set theme model `light` or `dark`.
+Manually set theme mode: `light` or `dark`. This prop will override the native color scheme and its an optional prop.
 
 ```jsx
 import {TailwindProvider} from 'tailwind-rn';
