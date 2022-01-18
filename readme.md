@@ -183,7 +183,24 @@ import {TailwindProvider} from 'tailwind-rn';
 import utilities from './tailwind.json';
 
 const App = () => (
-	<TailwindProvider utilities={utilities}>
+	<TailwindProvider utilities={utilities} theme="dark">
+		<MyComponent />
+	</TailwindProvider>
+);
+```
+
+#### theme
+
+Type: `string | undefined | null`
+
+Manually set theme model `light` or `dark`.
+
+```jsx
+import {TailwindProvider} from 'tailwind-rn';
+import utilities from './tailwind.json';
+
+const App = () => (
+	<TailwindProvider utilities={utilities} theme="dark">
 		<MyComponent />
 	</TailwindProvider>
 );
