@@ -16,7 +16,7 @@ interface Props {
 }
 
 const TailwindProvider: React.FC<Props> = ({utilities, theme, children}) => {
-	const colorScheme = theme ?? useColorScheme() ?? 'light';
+	const colorScheme = useColorScheme() ?? 'light';
 	const {width, height} = useDimensions().window;
 	const {reduceMotionEnabled: reduceMotion} = useAccessibilityInfo();
 	const orientation = useDeviceOrientation().portrait
@@ -25,13 +25,13 @@ const TailwindProvider: React.FC<Props> = ({utilities, theme, children}) => {
 
 	const tailwind = React.useMemo(() => {
 		return create(utilities, {
-			colorScheme,
+			colorScheme: theme ?? colorScheme,
 			width,
 			height,
 			reduceMotion: Boolean(reduceMotion),
 			orientation
 		});
-	}, [utilities, colorScheme, width, height, reduceMotion, orientation]);
+	}, [utilities, colorScheme, width, height, reduceMotion, orientation, theme]);
 
 	return (
 		<TailwindContext.Provider value={tailwind}>
