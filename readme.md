@@ -41,7 +41,7 @@ $ npm install tailwind-rn
 2. Install Tailwind and `concurrently`.
 
 ```
-$ npm install --save-dev tailwindcss concurrently
+$ npm install --save-dev tailwindcss postcss concurrently
 ```
 
 3. Create Tailwind config and necessary files.
