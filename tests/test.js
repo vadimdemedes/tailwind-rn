@@ -48,3 +48,9 @@ test('ignore extra spaces', async t => {
 		}
 	);
 });
+
+test('ignore transforms', async t => {
+	const {tailwind} = await compile('rotate-45');
+
+	t.deepEqual(tailwind('rotate-45'), {});
+});

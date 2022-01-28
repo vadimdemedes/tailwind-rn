@@ -6,13 +6,15 @@ import {Utilities} from './types';
 const getStyle = (rule: css.Rule) => {
 	const declarations = rule.declarations as Array<Required<css.Declaration>>;
 
-	const properties: StyleTuple[] = declarations.map(({property, value}) => {
-		if (typeof value === 'string' && value.endsWith('rem')) {
-			return [property, remToPx(value)];
-		}
+	const properties: StyleTuple[] = declarations
+		.filter(({property}) => property !== 'transform')
+		.map(({property, value}) => {
+			if (typeof value === 'string' && value.endsWith('rem')) {
+				return [property, remToPx(value)];
+			}
 
-		return [property, value];
-	});
+			return [property, value];
+		});
 
 	return cssToReactNative(properties);
 };
