@@ -57,7 +57,7 @@ const build = () => {
 };
 
 if (watch) {
-	chokidar.watch(input).on('all', build);
+	chokidar.watch(input, {awaitWriteFinish: true}).on('all', build);
 } else {
 	build();
 }
