@@ -4,7 +4,7 @@ const tempy = require('tempy');
 const build = require('../../dist/build').default;
 const create = require('../../dist/create').default;
 
-const compile = async (classNames, config, media) => {
+const compile = async (classNames, customConfig, media) => {
 	const input = tempy.file();
 	fs.writeFileSync(input, '@tailwind utilities;');
 
@@ -24,11 +24,14 @@ const compile = async (classNames, config, media) => {
 		output
 	];
 
-	if (config) {
-		const path = tempy.file();
-		fs.writeFileSync(path, `module.exports = ${JSON.stringify(config)}`);
-		args.push('--config', path);
-	}
+	const config = {
+		corePlugins: require('../../unsupported-core-plugins'),
+		...customConfig
+	};
+
+	const configPath = tempy.file();
+	fs.writeFileSync(configPath, `module.exports = ${JSON.stringify(config)}`);
+	args.push('--config', configPath);
 
 	await execa('npx', args);
 
