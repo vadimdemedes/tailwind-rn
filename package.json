@@ -21,7 +21,8 @@
 		"test": "xo && tsc && ava"
 	},
 	"files": [
-		"dist"
+		"dist",
+		"unsupported-core-plugins.js"
 	],
 	"keywords": [
 		"tailwind",

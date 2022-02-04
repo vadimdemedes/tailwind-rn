@@ -20,6 +20,15 @@ test('ignore unknown classes', async t => {
 	});
 });
 
+test('ignore disabled classes', async t => {
+	const classNames = 'text-blue-500 transform scale-95';
+	const {tailwind} = await compile(classNames);
+
+	t.deepEqual(tailwind(classNames), {
+		color: 'rgba(59, 130, 246, 1)'
+	});
+});
+
 test('ignore no value param', async t => {
 	const {tailwind} = await compile('');
 
