@@ -183,24 +183,24 @@ import {TailwindProvider} from 'tailwind-rn';
 import utilities from './tailwind.json';
 
 const App = () => (
-	<TailwindProvider utilities={utilities} theme="dark">
+	<TailwindProvider utilities={utilities}>
 		<MyComponent />
 	</TailwindProvider>
 );
 ```
 
-#### theme
+#### colorScheme
 
-Type: `string | undefined | null`
+Type: `string`
 
-Manually set theme mode: `light` or `dark`. This prop will override the native color scheme and its an optional prop.
+Override the default color scheme. Possible values are `light` or `dark`.
 
 ```jsx
 import {TailwindProvider} from 'tailwind-rn';
 import utilities from './tailwind.json';
 
 const App = () => (
-	<TailwindProvider utilities={utilities} theme="dark">
+	<TailwindProvider utilities={utilities} colorScheme="dark">
 		<MyComponent />
 	</TailwindProvider>
 );

@@ -39,7 +39,7 @@ Module._load = function (request, parent) {
 
 const {TailwindProvider, useTailwind} = require('..');
 
-const render = async (classNames, theme) => {
+const render = async (classNames, colorScheme) => {
 	const {utilities} = await compile(classNames, {
 		theme: {
 			extend: {
@@ -64,7 +64,7 @@ const render = async (classNames, theme) => {
 		testRenderer = TestRenderer.create(
 			React.createElement(
 				TailwindProvider,
-				{utilities, theme},
+				{utilities, colorScheme},
 				React.createElement(Component)
 			)
 		);

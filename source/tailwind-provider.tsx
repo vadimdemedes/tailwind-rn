@@ -1,21 +1,25 @@
-import {
-	useAccessibilityInfo,
-	useDeviceOrientation,
-	useDimensions
-} from '@react-native-community/hooks';
 import * as React from 'react';
 import {useColorScheme, ColorSchemeName} from 'react-native';
+import {
+	useDimensions,
+	useAccessibilityInfo,
+	useDeviceOrientation
+} from '@react-native-community/hooks';
 
-import create from './create';
 import TailwindContext from './tailwind-context';
+import create from './create';
 import {Utilities} from './types';
 
 interface Props {
 	utilities: Utilities;
-	theme?: ColorSchemeName;
+	colorScheme?: ColorSchemeName;
 }
 
-const TailwindProvider: React.FC<Props> = ({utilities, theme, children}) => {
+const TailwindProvider: React.FC<Props> = ({
+	utilities,
+	colorScheme: overrideColorScheme,
+	children
+}) => {
 	const colorScheme = useColorScheme() ?? 'light';
 	const {width, height} = useDimensions().window;
 	const {reduceMotionEnabled: reduceMotion} = useAccessibilityInfo();
@@ -25,13 +29,21 @@ const TailwindProvider: React.FC<Props> = ({utilities, theme, children}) => {
 
 	const tailwind = React.useMemo(() => {
 		return create(utilities, {
-			colorScheme: theme ?? colorScheme,
+			colorScheme: overrideColorScheme ?? colorScheme,
 			width,
 			height,
 			reduceMotion: Boolean(reduceMotion),
 			orientation
 		});
-	}, [utilities, colorScheme, width, height, reduceMotion, orientation, theme]);
+	}, [
+		utilities,
+		colorScheme,
+		overrideColorScheme,
+		width,
+		height,
+		reduceMotion,
+		orientation
+	]);
 
 	return (
 		<TailwindContext.Provider value={tailwind}>
