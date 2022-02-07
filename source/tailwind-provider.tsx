@@ -5,7 +5,6 @@ import {
 	useAccessibilityInfo,
 	useDeviceOrientation
 } from '@react-native-community/hooks';
-
 import TailwindContext from './tailwind-context';
 import create from './create';
 import {Utilities} from './types';
