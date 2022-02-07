@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useColorScheme} from 'react-native';
+import {useColorScheme, ColorSchemeName} from 'react-native';
 import {
 	useDimensions,
 	useAccessibilityInfo,
@@ -11,9 +11,14 @@ import {Utilities} from './types';
 
 interface Props {
 	utilities: Utilities;
+	colorScheme?: ColorSchemeName;
 }
 
-const TailwindProvider: React.FC<Props> = ({utilities, children}) => {
+const TailwindProvider: React.FC<Props> = ({
+	utilities,
+	colorScheme: overrideColorScheme,
+	children
+}) => {
 	const colorScheme = useColorScheme() ?? 'light';
 	const {width, height} = useDimensions().window;
 	const {reduceMotionEnabled: reduceMotion} = useAccessibilityInfo();
@@ -23,13 +28,21 @@ const TailwindProvider: React.FC<Props> = ({utilities, children}) => {
 
 	const tailwind = React.useMemo(() => {
 		return create(utilities, {
-			colorScheme,
+			colorScheme: overrideColorScheme ?? colorScheme,
 			width,
 			height,
 			reduceMotion: Boolean(reduceMotion),
 			orientation
 		});
-	}, [utilities, colorScheme, width, height, reduceMotion, orientation]);
+	}, [
+		utilities,
+		colorScheme,
+		overrideColorScheme,
+		width,
+		height,
+		reduceMotion,
+		orientation
+	]);
 
 	return (
 		<TailwindContext.Provider value={tailwind}>

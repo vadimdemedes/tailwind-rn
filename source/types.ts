@@ -1,3 +1,5 @@
+import {ColorSchemeName} from 'react-native';
+
 export type Style = Record<string, unknown>;
 export type Utilities = Record<
 	string,
@@ -6,10 +8,9 @@ export type Utilities = Record<
 		media?: string;
 	}
 >;
-
 export interface Environment {
 	orientation: 'portrait' | 'landscape';
-	colorScheme: 'light' | 'dark';
+	colorScheme: ColorSchemeName;
 	reduceMotion: boolean;
 	width: number;
 	height: number;

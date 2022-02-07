@@ -39,7 +39,7 @@ Module._load = function (request, parent) {
 
 const {TailwindProvider, useTailwind} = require('..');
 
-const render = async classNames => {
+const render = async (classNames, colorScheme) => {
 	const {utilities} = await compile(classNames, {
 		theme: {
 			extend: {
@@ -64,7 +64,7 @@ const render = async classNames => {
 		testRenderer = TestRenderer.create(
 			React.createElement(
 				TailwindProvider,
-				{utilities},
+				{utilities, colorScheme},
 				React.createElement(Component)
 			)
 		);
@@ -97,6 +97,24 @@ test.serial('dark mode', async t => {
 	colorScheme = 'dark';
 
 	const style = await render('bg-white dark:bg-black');
+
+	t.deepEqual(style, {
+		backgroundColor: 'rgba(0, 0, 0, 1)'
+	});
+});
+
+test.serial('override native color scheme to light', async t => {
+	colorScheme = 'dark';
+
+	const style = await render('bg-white dark:bg-black', 'light');
+
+	t.deepEqual(style, {
+		backgroundColor: 'rgba(255, 255, 255, 1)'
+	});
+});
+
+test.serial('override native color scheme to dark', async t => {
+	const style = await render('bg-white dark:bg-black', 'dark');
 
 	t.deepEqual(style, {
 		backgroundColor: 'rgba(0, 0, 0, 1)'

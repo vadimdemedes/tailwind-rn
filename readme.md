@@ -197,6 +197,23 @@ const App = () => (
 );
 ```
 
+#### colorScheme
+
+Type: `string`
+
+Override the default color scheme. Possible values are `light` or `dark`.
+
+```jsx
+import {TailwindProvider} from 'tailwind-rn';
+import utilities from './tailwind.json';
+
+const App = () => (
+	<TailwindProvider utilities={utilities} colorScheme="dark">
+		<MyComponent />
+	</TailwindProvider>
+);
+```
+
 ### useTailwind
 
 React hook, which returns a `tailwind` function, that accepts a string with class names. This function returns an object of styles, which can be applied to a React Native view via `style` property.
