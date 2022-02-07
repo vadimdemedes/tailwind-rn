@@ -39,7 +39,7 @@ Module._load = function (request, parent) {
 
 const {TailwindProvider, useTailwind} = require('..');
 
-const render = async (classNames, colorScheme) => {
+const render = async (classNames, {colorScheme} = {}) => {
 	const {utilities} = await compile(classNames, {
 		theme: {
 			extend: {
@@ -106,7 +106,7 @@ test.serial('dark mode', async t => {
 test.serial('override native color scheme to light', async t => {
 	colorScheme = 'dark';
 
-	const style = await render('bg-white dark:bg-black', 'light');
+	const style = await render('bg-white dark:bg-black', {colorScheme: 'light'});
 
 	t.deepEqual(style, {
 		backgroundColor: 'rgba(255, 255, 255, 1)'
@@ -114,7 +114,7 @@ test.serial('override native color scheme to light', async t => {
 });
 
 test.serial('override native color scheme to dark', async t => {
-	const style = await render('bg-white dark:bg-black', 'dark');
+	const style = await render('bg-white dark:bg-black', {colorScheme: 'dark'});
 
 	t.deepEqual(style, {
 		backgroundColor: 'rgba(0, 0, 0, 1)'
