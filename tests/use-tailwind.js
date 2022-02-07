@@ -103,7 +103,7 @@ test.serial('dark mode', async t => {
 	});
 });
 
-test.serial('override native color scheme', async t => {
+test.serial('override native color scheme to light', async t => {
 	colorScheme = 'dark';
 
 	const style = await render('bg-white dark:bg-black', 'light');
@@ -113,7 +113,7 @@ test.serial('override native color scheme', async t => {
 	});
 });
 
-test.serial('set dark mode via TailwindProvider', async t => {
+test.serial('override native color scheme to dark', async t => {
 	const style = await render('bg-white dark:bg-black', 'dark');
 
 	t.deepEqual(style, {
