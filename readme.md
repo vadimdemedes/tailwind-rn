@@ -13,6 +13,33 @@ All styles are generated directly from Tailwind's output, so they're always up-t
 
 [Migrating from v3.x?](migrate.md)
 
+---
+
+<div align="center">
+	<p>
+		<p>
+			<sup>
+				<a href="https://opencollective.com/vadimdemedes">My open source work is supported by the community ❤️</a>
+			</sup>
+		</p>
+		<sup>Special thanks to:</sup>
+		<br>
+		<a href="https://workos.com/?utm_campaign=github_repo&utm_medium=referral&utm_content=tailwind_rn&utm_source=github">
+			<div>
+				<img src="https://vadimdemedes.com/github/workos.svg" width="200" alt="WorkOS">
+			</div>
+			<b>Your app, enterprise-ready.</b>
+			<div>
+				<sub>Start selling to enterprise customers with just a few lines of code.</sub>
+				<br>
+				<sup>Add Single Sign-On (and more) in minutes instead of months.</sup>
+			</div>
+		</a>
+	</p>
+	<br>
+	<br>
+</div>
+
 ## Install
 
 ```
