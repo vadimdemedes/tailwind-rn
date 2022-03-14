@@ -1,3 +1,7 @@
+[![](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)
+
+---
+
 # tailwind-rn ![Status](https://github.com/vadimdemedes/tailwind-rn/workflows/test/badge.svg)
 
 > Use [Tailwind](https://tailwindcss.com) in [React Native](https://reactnative.dev) projects
