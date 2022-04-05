@@ -66,20 +66,22 @@ It will do most of the setup for you, but you'll have to follow a few more instr
 1. Install `tailwind-rn`.
 
 ```
-$ npm install tailwind-rn
+npm install tailwind-rn
 ```
 
 2. Install Tailwind and `concurrently`.
 
 ```
-$ npm install --save-dev tailwindcss postcss concurrently
+npm install --save-dev tailwindcss postcss concurrently
 ```
 
 3. Create Tailwind config and necessary files.
 
 ```
-$ npx tailwindcss init
-$ echo '@tailwind utilities;' > input.css
+npx tailwindcss init
+```
+```
+echo '@tailwind utilities;' > input.css
 ```
 
 These commands will create the following files:
@@ -111,7 +113,7 @@ Make sure to configure [`content`](https://tailwindcss.com/docs/content-configur
 5. Build Tailwind styles in watch mode.
 
 ```
-$ npm run dev:tailwind
+npm run dev:tailwind
 ```
 
 After styles are built, you'll see two more files:
