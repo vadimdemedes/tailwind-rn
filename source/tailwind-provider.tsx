@@ -10,8 +10,9 @@ import create from './create';
 import {Utilities} from './types';
 
 interface Props {
-	utilities: Utilities;
+	children: React.ReactNode;
 	colorScheme?: ColorSchemeName;
+	utilities: Utilities;
 }
 
 const TailwindProvider: React.FC<Props> = ({
