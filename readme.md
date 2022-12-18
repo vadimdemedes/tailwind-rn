@@ -263,7 +263,7 @@ const MyComponent = () => {
 
 ## IntelliSense
 
-Intellisense can be provided by customizing the setting `tailwindCSS.experimental.classRegex` within the offical Tailwind VSCode extension.
+IntelliSense can be provided by customizing the setting `tailwindCSS.experimental.classRegex` within the official Tailwind VSCode extension.
 
 ```json
 {
