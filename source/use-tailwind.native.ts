@@ -1,8 +1,8 @@
-const useTailwind = () => {
-  return (str: string) => ({
-    $$css: true,
-    [str]: str
-  })
-}
+import {useContext} from 'react';
+import TailwindContext from './tailwind-context';
 
-export default useTailwind
+const useTailwind = () => {
+	return useContext(TailwindContext);
+};
+
+export default useTailwind;
