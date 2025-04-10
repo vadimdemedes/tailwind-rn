@@ -9,7 +9,7 @@ import TailwindContext from './tailwind-context';
 import create from './create';
 import {Utilities} from './types';
 
-interface Props {
+interface Props extends React.PropsWithChildren {
 	utilities: Utilities;
 	colorScheme?: ColorSchemeName;
 }
